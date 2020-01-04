@@ -409,8 +409,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundBlock: {fileID: 1877176595618713091, guid: 5219bcb76fc88c54681eae79ba983635,
     type: 3}
+  borderBlock: {fileID: 5532503343348421447, guid: a16cb86cab0bfe5428af4f35eb071863,
+    type: 3}
   amplitude: 5
   freq: 8
+  cols: 75
+  rows: 75
+  borderSize: 4
 --- !u!4 &2106536683
 Transform:
   m_ObjectHideFlags: 0
