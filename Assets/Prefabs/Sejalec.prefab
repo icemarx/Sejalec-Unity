@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   gravitySmoother: 0.1
+  Flower: {fileID: 1546481683510669689, guid: 3b4e84b3ab7e1544d8bbbac35b6295be, type: 3}
 --- !u!1001 &2014597551518693997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263,7 +264,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: bca42de065c2327408ac37c176a9e5e4,
         type: 3}
       propertyPath: m_Name
-      value: sejalcekmodelbarva2
+      value: Sejalec
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bca42de065c2327408ac37c176a9e5e4, type: 3}
