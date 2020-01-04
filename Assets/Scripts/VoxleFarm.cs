@@ -7,6 +7,8 @@ public class VoxleFarm : MonoBehaviour
     public GameObject groundBlock;
     public float amplitude = 5f;
     public float freq = 8f;
+    public int cols = 75;
+    public int rows = 75;
 
     void Start()
     {
@@ -15,9 +17,6 @@ public class VoxleFarm : MonoBehaviour
 
     void generateTerrain()
     {
-        int cols = 75;
-        int rows = 75;
-
         for(int x = 0; x<cols; x++)
         {
             for(int z = 0; z<rows; z++)
