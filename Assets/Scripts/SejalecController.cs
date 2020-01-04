@@ -5,6 +5,7 @@ using UnityEngine;
 public class SejalecController : MonoBehaviour{
 
     public float speed;
+    public float gravitySmoother;
 
     private CharacterController controller;
 
@@ -19,7 +20,7 @@ public class SejalecController : MonoBehaviour{
         float v = Input.GetAxis("Vertical");
 
         Vector3 playerMovement = new Vector3(h, 0, v);
-        playerMovement.y += Physics.gravity.y * Time.deltaTime;
+        playerMovement.y += Physics.gravity.y * gravitySmoother;
         playerMovement *= speed * Time.deltaTime;
 
         controller.Move(playerMovement);
