@@ -216,6 +216,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d41e49cb55dd641bc60e872e932c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotSpeed: 1
+  Target: {fileID: 708707360}
+  Player: {fileID: 1877902853}
+  camYMin: -30
+  camYMax: 60
 --- !u!1 &419747551
 GameObject:
   m_ObjectHideFlags: 0
