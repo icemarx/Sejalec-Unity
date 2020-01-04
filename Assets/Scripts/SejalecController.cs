@@ -8,6 +8,7 @@ public class SejalecController : MonoBehaviour{
     public float gravitySmoother;
 
     private CharacterController controller;
+    private Vector3 playerMovement;
 
     // Start is called before the first frame update
     void Start() {
@@ -19,8 +20,12 @@ public class SejalecController : MonoBehaviour{
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector3 playerMovement = new Vector3(h, 0, v);
-        playerMovement.y += Physics.gravity.y * gravitySmoother;
+        playerMovement = new Vector3(h, playerMovement.y, v);
+
+
+        if(!controller.isGrounded)
+            playerMovement.y += Physics.gravity.y * gravitySmoother;
+
         playerMovement *= speed * Time.deltaTime;
 
         controller.Move(playerMovement);
