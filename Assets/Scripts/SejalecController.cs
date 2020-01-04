@@ -20,8 +20,9 @@ public class SejalecController : MonoBehaviour{
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        playerMovement = new Vector3(h, playerMovement.y, v);
-
+        float tmp = playerMovement.y;
+        playerMovement = (transform.forward*v + transform.right*h).normalized;
+        playerMovement.y = tmp;
 
         if(!controller.isGrounded)
             playerMovement.y += Physics.gravity.y * gravitySmoother;
