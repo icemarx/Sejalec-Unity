@@ -378,3 +378,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bca42de065c2327408ac37c176a9e5e4, type: 3}
+--- !u!1 &2106536681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2106536683}
+  - component: {fileID: 2106536682}
+  m_Layer: 0
+  m_Name: VoxleFarm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2106536682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106536681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f979d29142089449379e748a299134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundBlock: {fileID: 1877176595618713091, guid: 5219bcb76fc88c54681eae79ba983635,
+    type: 3}
+  borderBlock: {fileID: 5532503343348421447, guid: a16cb86cab0bfe5428af4f35eb071863,
+    type: 3}
+  amplitude: 5
+  freq: 8
+  cols: 75
+  rows: 75
+  borderSize: 4
+--- !u!4 &2106536683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106536681}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.6396165, y: 0.49033654, z: -0.28900498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
