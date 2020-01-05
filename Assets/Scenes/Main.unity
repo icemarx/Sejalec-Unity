@@ -359,6 +359,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 810531258}
     m_Modifications:
+    - target: {fileID: 1865360005320754590, guid: 86b999bdb787f4b42b89ab47d1ac2c64,
+        type: 3}
+      propertyPath: m_Name
+      value: Seeds Number
+      objectReference: {fileID: 0}
     - target: {fileID: 1865360005452480918, guid: 86b999bdb787f4b42b89ab47d1ac2c64,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -790,6 +795,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 810531258}
     m_Modifications:
+    - target: {fileID: 1865360005320754590, guid: 86b999bdb787f4b42b89ab47d1ac2c64,
+        type: 3}
+      propertyPath: m_Name
+      value: Water Number
+      objectReference: {fileID: 0}
     - target: {fileID: 1865360005452480918, guid: 86b999bdb787f4b42b89ab47d1ac2c64,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1042,6 +1052,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 662224170}
   scoreContainer: {fileID: 1944160958}
   timerText: {fileID: 45588413}
+  seedsText: {fileID: 1433760320}
+  waterText: {fileID: 1257747436}
 --- !u!4 &821054936
 Transform:
   m_ObjectHideFlags: 0
@@ -1528,6 +1540,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf8c32e91eb6b87499c404c67ee2cd85, type: 3}
+--- !u!114 &1257747436 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1865360005320754588, guid: 86b999bdb787f4b42b89ab47d1ac2c64,
+    type: 3}
+  m_PrefabInstance: {fileID: 796169105}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1433760320 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1865360005320754588, guid: 86b999bdb787f4b42b89ab47d1ac2c64,
+    type: 3}
+  m_PrefabInstance: {fileID: 170925596}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1944160956
 GameObject:
   m_ObjectHideFlags: 0

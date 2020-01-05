@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     private int timeInSeconds = 0;
     public Text timerText;
 
+    public Text seedsText;
+    public Text waterText;
+
     void Start()
     {
         SetScore(0);
@@ -104,6 +107,16 @@ public class GameManager : MonoBehaviour
         float scoreWidth = width / 100f * procentage;
 
         scoreRect.sizeDelta = new Vector2(scoreWidth, scoreRect.sizeDelta.y);
+    }
+
+    public void SetSeedsNumber(int seedsNum)
+    {
+        seedsText.text = seedsNum.ToString();
+    }
+
+    public void SetWaterNumber(int waterNum)
+    {
+        waterText.text = waterNum.ToString();
     }
 
     public void WinMsg()
