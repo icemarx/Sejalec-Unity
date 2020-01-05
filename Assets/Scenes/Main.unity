@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -218,6 +218,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1877902852, guid: 69072b05c962b7341823f7fd5106a62c, type: 3}
+      propertyPath: Flowers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877902852, guid: 69072b05c962b7341823f7fd5106a62c, type: 3}
+      propertyPath: Flowers.Array.data[4]
+      value: 
+      objectReference: {fileID: 2793016538621313306, guid: 3b1192b8ab45b8a45be86a3e09de8cfb,
+        type: 3}
     - target: {fileID: 6813942946773930359, guid: 69072b05c962b7341823f7fd5106a62c,
         type: 3}
       propertyPath: m_LocalPosition.x
