@@ -42,6 +42,7 @@ public class VoxleFarm : MonoBehaviour
                 }
 
                 newBlock.transform.position = new Vector3(x, y, z);
+                newBlock.transform.parent = transform;
             }
         }
     }
