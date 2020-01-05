@@ -7,7 +7,7 @@ public class SejalecController : MonoBehaviour{
     public float speed;
     public float gravitySmoother;
 
-    public GameObject Flower;
+    public GameObject[] Flowers;
     public GameObject Seed;
 
     private CharacterController controller;
@@ -26,8 +26,11 @@ public class SejalecController : MonoBehaviour{
         Movement();
 
         // Plant when mouse clicked
-        if (Input.GetMouseButton(0)) SelectForPlanting();
+        if (Input.GetMouseButton(0)) DisplaySelected(PLANTED);
         if (Input.GetMouseButtonUp(0)) Plant();
+
+        if (Input.GetMouseButton(1)) DisplaySelected(WATERED);
+        if (Input.GetMouseButtonUp(1)) Water();
     }
 
     void Movement() {
@@ -46,7 +49,12 @@ public class SejalecController : MonoBehaviour{
         controller.Move(playerMovement);
     }
 
-    void SelectForPlanting() {
+
+    private const int DIRT    = 0;
+    private const int PLANTED = 1;
+    private const int GRASS   = 2;
+    private const int WATERED = 3;
+    void DisplaySelected(int color) {
         RaycastHit hit;
         Vector3 ray_start = transform.position + transform.forward;
         ray_start.y = transform.position.y + Vector3.up.y;
@@ -59,8 +67,8 @@ public class SejalecController : MonoBehaviour{
             if (previously_selected != null && previously_selected != target) Deselect();
             
             // try to recolor the new target
-            if (target.tag == "Dirt")  Select(0, 1, target);
-            else if (target.tag == "Grass") Select(2, 1, target);
+            if (target.tag == "Dirt")  Select(DIRT, color, target);
+            else if (target.tag == "Grass") Select(GRASS, color, target);
             else if (previously_selected != null)
                 // new target is not a valid target
                 Deselect();
@@ -95,6 +103,48 @@ public class SejalecController : MonoBehaviour{
                 Debug.Log("*planting noises*");
                 GameObject seed = Instantiate(Seed, hit.point, Quaternion.identity);
                 seed.transform.parent = target.transform;
+
+                Deselect();
+            }
+        }
+    }
+
+    void Water() {
+        RaycastHit hit;
+        Vector3 ray_start = transform.position + transform.forward;
+        ray_start.y = transform.position.y + Vector3.up.y;
+
+        // Debug.DrawLine(ray_start, ray_start + Vector3.down * 5f, Color.blue, 1000);
+        if (Physics.Raycast(ray_start, Vector3.down, out hit, 5f)) {
+            GameObject target = hit.collider.gameObject;
+            if (target.tag == "Dirt" || target.tag == "Grass") {
+                Debug.Log("*watering noises*");
+
+                Transform[] children = target.GetComponentsInChildren<Transform>();
+
+                if (children.Length > 1) {      // apparently each object is also a child of itself. That's why > 1
+                    if (target.tag == "Dirt") {
+                        Debug.Log("We have grass");
+                        target.tag = "Grass";
+                        target.GetComponent<ChangeGround>().ChangeMaterial(previous_index = GRASS);
+
+                        // TODO: increase score
+                    }
+
+                    bool hadSeeds = false;
+                    foreach (Transform child in children) {
+                        if (child.gameObject.tag == "Seed") {
+
+                            // replace with random flower from list
+                            GameObject f = Flowers[((int) Mathf.Floor(Random.value * 100)) % Flowers.Length];
+                            GameObject flower = Instantiate(f, child.position, child.rotation);
+                            flower.transform.parent = target.transform;
+
+                            // remove seed
+                            Destroy(child.gameObject);
+                        }
+                    }
+                }
 
                 Deselect();
             }
