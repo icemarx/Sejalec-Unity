@@ -12,6 +12,8 @@ public class CameraController : MonoBehaviour {
     public float camYMin;
     public float camYMax;
 
+    public GameObject gameManager;
+
 
 
     // Start is called before the first frame update
@@ -22,14 +24,17 @@ public class CameraController : MonoBehaviour {
     }
     
     void LateUpdate() {
-        x += Input.GetAxis("Mouse X") * rotSpeed;
-        y -= Input.GetAxis("Mouse Y") * rotSpeed;
+        if (!gameManager.GetComponent<GameManager>().GetIsPaused())
+        {
+            x += Input.GetAxis("Mouse X") * rotSpeed;
+            y -= Input.GetAxis("Mouse Y") * rotSpeed;
 
-        y = Mathf.Clamp(y, camYMin, camYMax);
+            y = Mathf.Clamp(y, camYMin, camYMax);
 
-        transform.LookAt(Target);
+            transform.LookAt(Target);
 
-        Target.rotation = Quaternion.Euler(y, x, 0);
-        Player.rotation = Quaternion.Euler(0, x, 0);
+            Target.rotation = Quaternion.Euler(y, x, 0);
+            Player.rotation = Quaternion.Euler(0, x, 0);
+        }
     }
 }
