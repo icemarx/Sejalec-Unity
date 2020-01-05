@@ -86,9 +86,11 @@ public class SejalecController : MonoBehaviour{
     }
 
     void Deselect() {
-        previously_selected.GetComponent<ChangeGround>().ChangeMaterial(previous_index);
-        previous_index = -1;
-        previously_selected = null;
+        if(previously_selected != null) {
+            previously_selected.GetComponent<ChangeGround>().ChangeMaterial(previous_index);
+            previous_index = -1;
+            previously_selected = null;
+        }
     }
 
     void Plant() {
