@@ -101,7 +101,7 @@ public class SejalecController : MonoBehaviour{
             GameObject target = hit.collider.gameObject;
             if(target.tag == "Dirt" || target.tag == "Grass") {
                 Debug.Log("*planting noises*");
-                GameObject seed = Instantiate(Seed, hit.point, Quaternion.identity);
+                GameObject seed = Instantiate(Seed, hit.point, transform.rotation);
                 seed.transform.parent = target.transform;
 
                 Deselect();
