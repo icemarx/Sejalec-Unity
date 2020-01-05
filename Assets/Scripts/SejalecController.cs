@@ -42,7 +42,6 @@ public class SejalecController : MonoBehaviour{
     }
 
     void Plant() {
-        Debug.Log("*plant noises*");
 
         // compute position
         Vector3 flower_position = transform.position + transform.forward;
@@ -54,8 +53,10 @@ public class SejalecController : MonoBehaviour{
 
         // Debug.DrawLine(ray_start, ray_start + Vector3.down * 5f, Color.blue, 1000);
         if (Physics.Raycast(ray_start, Vector3.down, out hit, 5f)) {
-
-            GameObject flowy = Instantiate(Flower, hit.point, Quaternion.identity);
+            if(hit.collider.gameObject.tag == "Dirt" || hit.collider.gameObject.tag == "Grass") {
+                Debug.Log("*plant noises*");
+                GameObject flowy = Instantiate(Flower, hit.point, Quaternion.identity);
+            }
         }
     }
 }
