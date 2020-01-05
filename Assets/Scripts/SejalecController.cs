@@ -127,7 +127,7 @@ public class SejalecController : MonoBehaviour{
 
                 if (children.Length > 1) {      // apparently each object is also a child of itself. That's why > 1
                     if (target.tag == "Dirt") {
-                        Debug.Log("We have grass");
+                        // Debug.Log("We have grass");
                         target.tag = "Grass";
                         target.GetComponent<ChangeGround>().ChangeMaterial(previous_index = GRASS);
 
@@ -140,8 +140,9 @@ public class SejalecController : MonoBehaviour{
                             hadSeeds = true;
 
                             // replace with random flower from list
-                            GameObject f = Flowers[((int) Mathf.Floor(Random.value * 100)) % Flowers.Length];
-                            GameObject flower = Instantiate(f, child.position, child.rotation);
+                            float indexer = Random.value * 100;
+                            GameObject f = Flowers[((int) Mathf.Floor(indexer)) % Flowers.Length];
+                            GameObject flower = Instantiate(f, child.position, Quaternion.Euler(child.eulerAngles + f.transform.eulerAngles) );
                             flower.transform.parent = target.transform;
 
                             // remove seed
