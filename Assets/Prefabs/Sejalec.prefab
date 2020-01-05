@@ -179,6 +179,7 @@ MonoBehaviour:
   speed: 3
   gravitySmoother: 0.1
   Flower: {fileID: 1546481683510669689, guid: 3b4e84b3ab7e1544d8bbbac35b6295be, type: 3}
+  Seed: {fileID: 6713877120005313815, guid: 86c28989ca6783146b4bef266dadc981, type: 3}
 --- !u!1001 &2014597551518693997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194,17 +195,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: bca42de065c2327408ac37c176a9e5e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.53
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bca42de065c2327408ac37c176a9e5e4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bca42de065c2327408ac37c176a9e5e4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.64
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bca42de065c2327408ac37c176a9e5e4,
         type: 3}

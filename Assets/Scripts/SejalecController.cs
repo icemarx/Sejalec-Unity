@@ -8,6 +8,7 @@ public class SejalecController : MonoBehaviour{
     public float gravitySmoother;
 
     public GameObject Flower;
+    public GameObject Seed;
 
     private CharacterController controller;
     private Vector3 playerMovement;
@@ -53,9 +54,12 @@ public class SejalecController : MonoBehaviour{
 
         // Debug.DrawLine(ray_start, ray_start + Vector3.down * 5f, Color.blue, 1000);
         if (Physics.Raycast(ray_start, Vector3.down, out hit, 5f)) {
-            if(hit.collider.gameObject.tag == "Dirt" || hit.collider.gameObject.tag == "Grass") {
-                Debug.Log("*plant noises*");
-                GameObject flowy = Instantiate(Flower, hit.point, Quaternion.identity);
+            GameObject target = hit.collider.gameObject;
+            if(target.tag == "Dirt" || target.tag == "Seeded" || target.tag == "Grass") {
+
+                Debug.Log("*planting noises*");
+                GameObject seed = Instantiate(Seed, hit.point, Quaternion.identity);
+                seed.transform.parent = target.transform;
             }
         }
     }
