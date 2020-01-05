@@ -6,6 +6,7 @@ public class SejalecController : MonoBehaviour{
 
     public float speed;
     public float gravitySmoother;
+    public float flower_effect_radius;
 
     public GameObject[] Flowers;
     public GameObject Seed;
@@ -132,9 +133,11 @@ public class SejalecController : MonoBehaviour{
 
                         // TODO: increase score
                     }
-                    
+
+                    bool hadSeeds = false;
                     foreach (Transform child in children) {
                         if (child.gameObject.tag == "Seed") {
+                            hadSeeds = true;
 
                             // replace with random flower from list
                             GameObject f = Flowers[((int) Mathf.Floor(Random.value * 100)) % Flowers.Length];
@@ -143,6 +146,22 @@ public class SejalecController : MonoBehaviour{
 
                             // remove seed
                             Destroy(child.gameObject);
+                        }
+                    }
+
+                    if(hadSeeds) {
+                        // affect all voxels in range
+                        Collider[] colliders = Physics.OverlapSphere(target.transform.position, flower_effect_radius);
+
+                        foreach(Collider c in colliders) {
+                            if(c.gameObject.tag == "Dirt") {
+                                // Debug.DrawLine(target.transform.position + Vector3.up * 2, c.transform.position + Vector3.up * 2, Color.blue, 100);
+
+                                c.gameObject.tag = "Grass";
+                                c.gameObject.GetComponent<ChangeGround>().ChangeMaterial(GRASS);
+
+                                // TODO: increase score
+                            }
                         }
                     }
                 }

@@ -227,6 +227,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1546481683510669689, guid: 3b4e84b3ab7e1544d8bbbac35b6295be,
         type: 3}
+    - target: {fileID: 1877902852, guid: 69072b05c962b7341823f7fd5106a62c, type: 3}
+      propertyPath: flower_effect_radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6813942946773930359, guid: 69072b05c962b7341823f7fd5106a62c,
         type: 3}
       propertyPath: m_LocalPosition.x
