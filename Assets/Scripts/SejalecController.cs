@@ -46,7 +46,7 @@ public class SejalecController : MonoBehaviour{
 
         // compute position
         Vector3 flower_position = transform.position + transform.forward;
-        flower_position.y = 0;
+        flower_position.y = transform.position.y;
 
         // TODO: use raycasting to get a better location
 
