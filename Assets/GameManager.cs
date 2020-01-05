@@ -10,6 +10,17 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     //public GameObject winMsg;
 
+    public Image scoreContainer;
+
+    private float _timer = 0;
+    private int timeInSeconds = 0;
+    public Text timerText;
+
+    void Start()
+    {
+        SetScore(0);
+    }
+
     void Update()
     {
         if (Input.GetButtonDown("Pause"))
@@ -22,6 +33,11 @@ public class GameManager : MonoBehaviour
             {
                 Unpause();
             }
+        }
+
+        if(!_paused)
+        {
+            SetTimer();
         }
     }
 
@@ -46,6 +62,48 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         pauseMenu.SetActive(false);
         _paused = false;
+    }
+
+    public void SetTimer()
+    {
+        _timer += Time.deltaTime;
+
+        int newTimeInSeconds = (int)Mathf.Floor(_timer);
+        if(newTimeInSeconds == timeInSeconds)
+        {
+            return;
+        }
+        else
+        {
+            timeInSeconds = newTimeInSeconds;
+        }
+
+        int minutes = timeInSeconds / 60;
+        int seconds = timeInSeconds % 60;
+
+        string timeForDisplay = minutes.ToString();
+
+        if(seconds<10)
+        {
+            timeForDisplay += ":0" + seconds;
+        } 
+        else
+        {
+            timeForDisplay += ":" + seconds;
+        }
+
+
+        timerText.text = timeForDisplay;
+    }
+
+    public void SetScore(int procentage)
+    {
+        float width = scoreContainer.GetComponent<RectTransform>().rect.width-4;
+        var scoreRect = scoreContainer.transform.GetChild(0).gameObject.transform as RectTransform;
+
+        float scoreWidth = width / 100f * procentage;
+
+        scoreRect.sizeDelta = new Vector2(scoreWidth, scoreRect.sizeDelta.y);
     }
 
     public void WinMsg()
