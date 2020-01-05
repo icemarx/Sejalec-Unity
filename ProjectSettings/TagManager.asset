@@ -8,6 +8,8 @@ TagManager:
   - Border
   - Grass
   - Seeded
+  - Seed
+  - Flower
   layers:
   - Default
   - TransparentFX

@@ -92,5 +92,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roza_1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 453cde6d802afe9498cad3909284cbf4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Flower
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 453cde6d802afe9498cad3909284cbf4, type: 3}
