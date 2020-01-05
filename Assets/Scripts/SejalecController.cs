@@ -132,8 +132,7 @@ public class SejalecController : MonoBehaviour{
 
                         // TODO: increase score
                     }
-
-                    bool hadSeeds = false;
+                    
                     foreach (Transform child in children) {
                         if (child.gameObject.tag == "Seed") {
 
