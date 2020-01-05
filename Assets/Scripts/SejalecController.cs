@@ -47,9 +47,15 @@ public class SejalecController : MonoBehaviour{
         // compute position
         Vector3 flower_position = transform.position + transform.forward;
         flower_position.y = transform.position.y;
+        
+        RaycastHit hit;
+        Vector3 ray_start = transform.position + transform.forward;
+        ray_start.y = transform.position.y + Vector3.up.y;
 
-        // TODO: use raycasting to get a better location
+        // Debug.DrawLine(ray_start, ray_start + Vector3.down * 5f, Color.blue, 1000);
+        if (Physics.Raycast(ray_start, Vector3.down, out hit, 5f)) {
 
-        GameObject flowy = Instantiate(Flower, flower_position, Quaternion.identity);
+            GameObject flowy = Instantiate(Flower, hit.point, Quaternion.identity);
+        }
     }
 }
