@@ -164,9 +164,7 @@ public class GameManager : MonoBehaviour
     }
 
     public bool addBigFlower(GameObject flower) {
-        Debug.Log("yay");
         if (flower.tag == "Flower") {
-            Debug.Log("added flower");
             this.big_flowers.Add(flower);
             return true;
         }

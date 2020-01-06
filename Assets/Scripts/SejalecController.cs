@@ -97,12 +97,18 @@ public class SejalecController : MonoBehaviour{
     }
 
     // assumes that the GameObject is in fact a voxel of size 1x1x1
-    Vector3 randomPointOnVoxel(GameObject voxel) {
+    Vector3 RandomPointOnVoxel(GameObject voxel) {
         Vector3 point = Random.onUnitSphere/2;
         point.y = 0.5f;
         point += voxel.transform.position;
 
         return point;
+    }
+
+    GameObject RandomFlower() {
+        int index = (int) Mathf.Floor(Random.value * 100);
+        index %= Flowers.Length;
+        return Flowers[index];
     }
 
     void Plant() {
@@ -154,8 +160,7 @@ public class SejalecController : MonoBehaviour{
                             hadSeeds = true;
 
                             // replace with random flower from list
-                            float indexer = Random.value * 100;
-                            GameObject f = Flowers[((int) Mathf.Floor(indexer)) % Flowers.Length];
+                            GameObject f = RandomFlower();
                             GameObject flower = Instantiate(f, child.position, Quaternion.Euler(child.eulerAngles + f.transform.eulerAngles) );
                             flower.transform.parent = target.transform;
 
@@ -172,6 +177,16 @@ public class SejalecController : MonoBehaviour{
                         Collider[] colliders = Physics.OverlapSphere(target.transform.position, flower_effect_radius);
 
                         foreach(Collider c in colliders) {
+                            if(c.gameObject.tag == "Grass" && Vector3.Magnitude(c.transform.position-target.transform.position) < Mathf.Ceil(flower_effect_radius/2)) {
+                                GameObject f = RandomFlower();
+                                Vector3 pos = RandomPointOnVoxel(c.gameObject);
+                                Quaternion rot = Quaternion.Euler(f.transform.eulerAngles + new Vector3(0, Random.Range(0,360), 0));
+
+                                GameObject small_flower = Instantiate(f, pos, rot);
+                                small_flower.transform.localScale *= 0.4f;
+                                small_flower.transform.parent = target.transform;
+                            }
+
                             if(c.gameObject.tag == "Dirt") {
                                 // Debug.DrawLine(target.transform.position + Vector3.up * 2, c.transform.position + Vector3.up * 2, Color.blue, 100);
 
