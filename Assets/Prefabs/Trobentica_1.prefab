@@ -87,5 +87,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trobentica_1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: d7e6929fbe4d5384daca836ab80e4535,
+        type: 3}
+      propertyPath: m_TagString
+      value: Flower
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7e6929fbe4d5384daca836ab80e4535, type: 3}

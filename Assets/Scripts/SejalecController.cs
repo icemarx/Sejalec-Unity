@@ -150,6 +150,9 @@ public class SejalecController : MonoBehaviour{
                             GameObject flower = Instantiate(f, child.position, Quaternion.Euler(child.eulerAngles + f.transform.eulerAngles) );
                             flower.transform.parent = target.transform;
 
+                            // add to list of flowers
+                            gameManager.GetComponent<GameManager>().addBigFlower(flower);
+
                             // remove seed
                             Destroy(child.gameObject);
                         }
