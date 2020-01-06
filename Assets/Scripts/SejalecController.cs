@@ -96,6 +96,15 @@ public class SejalecController : MonoBehaviour{
         }
     }
 
+    // assumes that the GameObject is in fact a voxel of size 1x1x1
+    Vector3 randomPointOnVoxel(GameObject voxel) {
+        Vector3 point = Random.onUnitSphere/2;
+        point.y = 0.5f;
+        point += voxel.transform.position;
+
+        return point;
+    }
+
     void Plant() {
         RaycastHit hit;
         Vector3 ray_start = transform.position + transform.forward;
