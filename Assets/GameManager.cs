@@ -19,8 +19,14 @@ public class GameManager : MonoBehaviour
     public Text seedsText;
     public Text waterText;
 
+    public GameObject voxleFarm;
+    private int _groundBlocksCount = 0;
+    public float winCondition = 0.6f;
+    private int _grassyBlocksCount = 0;
+
     void Start()
     {
+        _groundBlocksCount = voxleFarm.GetComponent<VoxleFarm>().GetGroundBlocksCount();
         SetScore(0);
     }
 
@@ -107,6 +113,24 @@ public class GameManager : MonoBehaviour
         float scoreWidth = width / 100f * procentage;
 
         scoreRect.sizeDelta = new Vector2(scoreWidth, scoreRect.sizeDelta.y);
+    }
+
+    public void AddToScore(int count)
+    {
+        int winCount = Mathf.CeilToInt(_groundBlocksCount * winCondition);
+        _grassyBlocksCount += count;
+
+
+        if(_grassyBlocksCount > winCount)
+        {
+            SetScore(100);
+            //TODO win screen
+            Debug.Log("You win");
+        }
+        else
+        {
+            SetScore(Convert.ToInt32((double)_grassyBlocksCount / winCount * 100));
+        }
     }
 
     public void SetSeedsNumber(int seedsNum)

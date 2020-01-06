@@ -15,9 +15,16 @@ public class VoxleFarm : MonoBehaviour
 
     public int borderSize = 4;
 
-    void Start()
+    private int _groundBlocksCount = 0;
+
+    void Awake()
     {
         GenerateTerrain();
+    }
+
+    public int GetGroundBlocksCount()
+    {
+        return _groundBlocksCount;
     }
 
     void GenerateTerrain()
@@ -39,6 +46,7 @@ public class VoxleFarm : MonoBehaviour
                 else
                 {
                     newBlock = GameObject.Instantiate(groundBlock);
+                    _groundBlocksCount++;
                 }
 
                 newBlock.transform.position = new Vector3(x, y, z);

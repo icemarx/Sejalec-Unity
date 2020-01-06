@@ -17,6 +17,8 @@ public class SejalecController : MonoBehaviour{
     private GameObject previously_selected;
     private int previous_index = 0;
 
+    public GameObject gameManager;
+
     // Start is called before the first frame update
     void Start() {
         controller = GetComponent<CharacterController>();
@@ -117,6 +119,8 @@ public class SejalecController : MonoBehaviour{
         Vector3 ray_start = transform.position + transform.forward;
         ray_start.y = transform.position.y + Vector3.up.y;
 
+        int changedCount = 0;
+
         // Debug.DrawLine(ray_start, ray_start + Vector3.down * 5f, Color.blue, 1000);
         if (Physics.Raycast(ray_start, Vector3.down, out hit, 5f)) {
             GameObject target = hit.collider.gameObject;
@@ -131,7 +135,8 @@ public class SejalecController : MonoBehaviour{
                         target.tag = "Grass";
                         target.GetComponent<ChangeGround>().ChangeMaterial(previous_index = GRASS);
 
-                        // TODO: increase score
+                        // count score
+                        changedCount++;
                     }
 
                     bool hadSeeds = false;
@@ -161,12 +166,15 @@ public class SejalecController : MonoBehaviour{
                                 c.gameObject.tag = "Grass";
                                 c.gameObject.GetComponent<ChangeGround>().ChangeMaterial(GRASS);
 
-                                // TODO: increase score
+                                // count score
+                                changedCount++;
                             }
                         }
                     }
                 }
 
+                // increase score
+                gameManager.GetComponent<GameManager>().AddToScore(changedCount);
                 Deselect();
             }
         }
