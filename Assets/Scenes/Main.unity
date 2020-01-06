@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1054,6 +1054,8 @@ MonoBehaviour:
   timerText: {fileID: 45588413}
   seedsText: {fileID: 1433760320}
   waterText: {fileID: 1257747436}
+  voxleFarm: {fileID: 2106536681}
+  winCondition: 0.6
 --- !u!4 &821054936
 Transform:
   m_ObjectHideFlags: 0
@@ -1321,6 +1323,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 116117797, guid: 69072b05c962b7341823f7fd5106a62c, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 821054934}
+    - target: {fileID: 1877902852, guid: 69072b05c962b7341823f7fd5106a62c, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 821054934}
