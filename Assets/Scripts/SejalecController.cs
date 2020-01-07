@@ -125,7 +125,7 @@ public class SejalecController : MonoBehaviour{
         if (Physics.Raycast(ray_start, Vector3.down, out hit, 5f)) {
             GameObject target = hit.collider.gameObject;
             if (target.tag == "Dirt" || target.tag == "Grass") {
-                // Debug.Log("*watering noises*");
+                //Debug.Log("*watering noises*");
 
                 Transform[] children = target.GetComponentsInChildren<Transform>();
 
