@@ -34,24 +34,31 @@ public class VoxleFarm : MonoBehaviour
     {
         System.Random rand = new System.Random();
 		
-		//izberi random block v notranjosti (x in z v obmocju 31-45)
-		float xTree = (float) rand.Next(31,46);
-		float zTree = (float) rand.Next(31,46);
-		float yTree = 1f; //ce kaksna napaka, da je usaj priblizno
+		//TODO: odloci se kje tocno bojo predmeti lahko postavljeni, da niso preblizu
 		
-		//izberi random block v zunanjem obrocu (x in z v obmocju 20-30 in 46-56)
+		//izberi random block v notranjosti (x in z v obmocju 25-35)
+		float xTree = (float) rand.Next(25,36);
+		float zTree = (float) rand.Next(25,36);
+		float yTree = 2f;
+		
+		//izberi random block v zunanjem obrocu (x in z v obmocju 13-23 in 46-56)
 		float xWell = (float) rand.Next(22);
-		if (xWell < 11) xWell += 20;
-		else xWell += 36;
+		if (xWell < 11) xWell += 13;
+		else xWell = (xWell % 11) + 46;
 		float zWell = (float) rand.Next(22);
-		if (zWell < 11) zWell += 20;
-		else zWell += 36;
-		float yWell = 1f; //ce kaksna napaka, da je usaj priblizno
+		if (zWell < 11) zWell += 13;
+		else zWell += (xWell % 11) + 46;
+		float yWell = 2f;
 		
-		//izberi block tik ob sejalcu na zacetku
-		float xKozolec = 25f;
-		float zKozolec = 25f;
-		float yKozolec = 3f; //zacasne koordinate
+		//preblizu sejalcu postavi ga malce v stran
+		if (xWell < 52f && xWell > 48f && zWell < 52f && zWell > 48f) {
+			xWell = 45f;
+			zWell = 55f;
+		}
+		//izberi block na hribcku ob igralcu
+		float xKozolec = 43f;
+		float zKozolec = 41f;
+		float yKozolec = 2f; 
 
         for (int x = 0; x<cols; x++)
         {
@@ -76,6 +83,7 @@ public class VoxleFarm : MonoBehaviour
 				
 				if (xWell == x && zWell == z) yWell = y;
 				if (xTree == x && zTree == z) yTree = y;
+				if (xKozolec == x && zKozolec == z) yKozolec = y;
             }
         }
 		
