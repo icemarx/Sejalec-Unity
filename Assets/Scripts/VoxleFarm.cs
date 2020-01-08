@@ -41,17 +41,15 @@ public class VoxleFarm : MonoBehaviour
 		float[] treeCoord = randomHribcek(TREE);
 		float[] wellCoord = randomHribcek(WELL);
 		
-		//izberi random block (x in z v obmocju 14-24)
 		float xTree = treeCoord[0];
 		float zTree = treeCoord[1];
 		float yTree = 2f;
 		
-		//izberi random block (x v obmocju 45-55 in z v obmocju 10-20)
 		float xWell = wellCoord[0];
 		float zWell = wellCoord[1];
 		float yWell = 2f;
 		
-		//izberi block na hribcku ob igralcu    x = 38  z = 20
+		//izberi block na hribcku ob igralcu    x = 41  z = 20
 		float xKozolec = 41f;
 		float zKozolec = 20f;
 		float yKozolec = 2f; 
