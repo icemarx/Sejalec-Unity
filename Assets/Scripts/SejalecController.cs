@@ -5,6 +5,7 @@ using UnityEngine;
 public class SejalecController : MonoBehaviour{
 
     public float speed;
+    public float speed_decrease;
     public float gravitySmoother;
     public float flower_effect_radius;
 
@@ -43,6 +44,11 @@ public class SejalecController : MonoBehaviour{
         float tmp = playerMovement.y;
         playerMovement = (transform.forward * v + transform.right * h).normalized;
         playerMovement.y = tmp;
+
+        if (StandingOn("Dirt")) {
+            Debug.Log("slowed down");
+            playerMovement *= speed_decrease;
+        }
 
         if (!controller.isGrounded)
             playerMovement.y += Physics.gravity.y * gravitySmoother;
@@ -205,5 +211,22 @@ public class SejalecController : MonoBehaviour{
                 Deselect();
             }
         }
+    }
+
+    /// <summary>
+    /// Raycasts an upwards-facing ray, in order to get the collider the player is standing on.
+    /// Result is true, if the tag matches tag_name and false if the target does not match
+    /// the tag, or there is no hit target.
+    /// </summary>
+    /// <param name="tag_name">string with the tag of the GameObject of interest</param>
+    /// <returns>true if the tags match, false otherwise</returns>
+    private bool StandingOn(string tag_name) {
+        float dist = 2;
+        Vector3 start = transform.position - dist * Vector3.up;
+        RaycastHit hit;
+        if (Physics.Raycast(start, Vector3.up, out hit, dist))
+            return hit.collider.gameObject.tag == tag_name;
+
+        return false;
     }
 }
