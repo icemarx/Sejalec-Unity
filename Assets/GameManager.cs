@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     private bool _paused = false;
 
     public GameObject pauseMenu;
-    //public GameObject winMsg;
+    public GameObject winMenu;
+    public Text winMsg;
 
     public Image scoreContainer;
 
@@ -127,8 +128,7 @@ public class GameManager : MonoBehaviour
         if(_grassyBlocksCount > winCount)
         {
             SetScore(100);
-            //TODO win screen
-            Debug.Log("You win");
+            DisplayWinMenu();
         }
         else
         {
@@ -146,9 +146,15 @@ public class GameManager : MonoBehaviour
         waterText.text = waterNum.ToString();
     }
 
-    public void WinMsg()
+    public void DisplayWinMenu()
     {
         Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        _paused = true;
+
+        winMsg.text = "Your Time Was " + timerText.text;
+        winMenu.SetActive(true);
     }
 
     public void RestartGame()
