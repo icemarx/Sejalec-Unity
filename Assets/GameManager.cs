@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     private int _groundBlocksCount = 0;
     public float winCondition = 0.6f;
     private int _grassyBlocksCount = 0;
+
+    private List<GameObject> big_flowers = new List<GameObject>();
 
     void Start()
     {
@@ -160,4 +163,16 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public bool addBigFlower(GameObject flower) {
+        if (flower.tag == "Flower") {
+            this.big_flowers.Add(flower);
+            return true;
+        }
+
+        return false;
+    }
+
+    public List<GameObject> getBigFlowers() {
+        return this.big_flowers;
+    }
 }
