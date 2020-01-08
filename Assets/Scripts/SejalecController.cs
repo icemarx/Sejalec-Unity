@@ -19,9 +19,12 @@ public class SejalecController : MonoBehaviour{
 
     public GameObject gameManager;
 
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start() {
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -42,6 +45,7 @@ public class SejalecController : MonoBehaviour{
 
         float tmp = playerMovement.y;
         playerMovement = (transform.forward * v + transform.right * h).normalized;
+        animator.SetFloat("speed", playerMovement.magnitude);       // apply animation
         playerMovement.y = tmp;
 
         if (!controller.isGrounded)
