@@ -19,6 +19,9 @@ public class VoxleFarm : MonoBehaviour
     public int borderSize = 4;
 
     private int _groundBlocksCount = 0;
+	
+	private const int TREE = 0;
+	private const int WELL = 1;
 
     void Awake()
     {
@@ -34,30 +37,23 @@ public class VoxleFarm : MonoBehaviour
     {
         System.Random rand = new System.Random();
 		
-		//TODO: odloci se kje tocno bojo predmeti lahko postavljeni, da niso preblizu
+		//pridobi hribcka
+		float[] treeCoord = randomHribcek(TREE);
+		float[] wellCoord = randomHribcek(WELL);
 		
-		//izberi random block v notranjosti (x in z v obmocju 25-35)
-		float xTree = (float) rand.Next(25,36);
-		float zTree = (float) rand.Next(25,36);
+		//izberi random block (x in z v obmocju 14-24)
+		float xTree = treeCoord[0];
+		float zTree = treeCoord[1];
 		float yTree = 2f;
 		
-		//izberi random block v zunanjem obrocu (x in z v obmocju 13-23 in 46-56)
-		float xWell = (float) rand.Next(22);
-		if (xWell < 11) xWell += 13;
-		else xWell = (xWell % 11) + 46;
-		float zWell = (float) rand.Next(22);
-		if (zWell < 11) zWell += 13;
-		else zWell += (xWell % 11) + 46;
+		//izberi random block (x v obmocju 45-55 in z v obmocju 10-20)
+		float xWell = wellCoord[0];
+		float zWell = wellCoord[1];
 		float yWell = 2f;
 		
-		//preblizu sejalcu postavi ga malce v stran
-		if (xWell < 52f && xWell > 48f && zWell < 52f && zWell > 48f) {
-			xWell = 45f;
-			zWell = 55f;
-		}
-		//izberi block na hribcku ob igralcu
-		float xKozolec = 43f;
-		float zKozolec = 41f;
+		//izberi block na hribcku ob igralcu    x = 38  z = 20
+		float xKozolec = 41f;
+		float zKozolec = 20f;
 		float yKozolec = 2f; 
 
         for (int x = 0; x<cols; x++)
@@ -145,4 +141,42 @@ public class VoxleFarm : MonoBehaviour
             return dimensionSize - 1 - coordinate;
         }
     }
+	
+	float[] randomHribcek(int well_tree) {
+		// 0 ==> X
+		// 1 ==> Z
+        System.Random rand = new System.Random();
+		int[,] hribcki;
+		int choose;
+		if (well_tree == TREE) {
+			// hribcki drevo
+			// x   z
+			// 60  56
+			// 45  43
+			// 38  53
+			// 26  51
+			// 57  36
+			// 24  35
+			hribcki = new int[,] {{60,56},{45,43},{38,53},{26,51},{57,36},{24,35}};
+			choose = rand.Next(6);
+		}
+		else {
+			// hribkci vodnjak
+			// x   z
+			// 15  60
+			// 20  39
+			// 10  44
+			// 12  14
+			// 27  19
+			// 18  24
+			// 34  27
+			// 66  45
+			hribcki = new int[,] {{15,60},{20,39},{10,44},{12,14},{27,19},{18,24},{34,27},{66,45}};
+			choose = rand.Next(8);
+		}
+		float[] result = new float[2];
+		result[0] = (float) hribcki[choose,0];
+		result[1] = (float) hribcki[choose,1];
+		return result;
+	}
 }

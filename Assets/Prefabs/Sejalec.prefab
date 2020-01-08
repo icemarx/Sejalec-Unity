@@ -101,6 +101,7 @@ MonoBehaviour:
   Player: {fileID: 6813942946773930359}
   camYMin: -30
   camYMax: 60
+  gameManager: {fileID: 0}
 --- !u!1 &708707359
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +187,7 @@ MonoBehaviour:
   - {fileID: 2460014382507424861, guid: 7e680f6332168a94e9d9a5b19c9c2434, type: 3}
   - {fileID: 2793016538621313306, guid: 3b1192b8ab45b8a45be86a3e09de8cfb, type: 3}
   Seed: {fileID: 6713877120005313815, guid: 86c28989ca6783146b4bef266dadc981, type: 3}
+  gameManager: {fileID: 0}
 --- !u!1001 &2014597551518693997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -211,7 +213,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: bca42de065c2327408ac37c176a9e5e4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bca42de065c2327408ac37c176a9e5e4,
         type: 3}
