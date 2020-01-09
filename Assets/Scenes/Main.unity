@@ -1948,7 +1948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotSpeed: 1
   Target: {fileID: 1733196375}
-  Player: {fileID: 936225543}
+  Player: {fileID: 3537592214972055512}
   camYMin: -30
   camYMax: 60
   gameManager: {fileID: 821054934}
