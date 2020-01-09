@@ -5,50 +5,93 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour {
 
-    public float speed;
-    public float gravitySmoother;
+    public float speed = 1f;
 	
-	public int currentX;
-	public int currentZ;
-	
-	private bool goTime;
-	private bool isHidden;
-	
+	public GameObject Sejalec;
+	public GameObject duhecSkin;
 	public GameObject duhec;
-	public GameObject thisObject;
+	public GameObject targetRoza;
+	
+	public GameObject gameManager;
+	
+	public AudioClip roar;
+    AudioSource audioSource;
 	
 	void Start() {
-		//startaj uro 
-		thisObject = GameObject.Instantiate(duhec);
-		thisObject.transform.position = new Vector3(35f, 10f, 35f);
-		//spawna na sredini in soundEffect roar or some shit
-		//thisObject vanish
-		isHidden = true;
-		//start timer
+		Debug.Log("Start duhec");
+		audioSource = GetComponent<AudioSource>();
+		
+		duhec = GameObject.Instantiate(duhecSkin);
+		duhec.transform.position = new Vector3(35f, 10f, 35f);
+		
+		audioSource.PlayOneShot(roar, 1f);
+		
+		Invoke("vanishAI", 10);
 	}
 	
 	void Update() {
-		if (!this) {
-			//premikaj se hahaha
+		// sejalec blizu duhca --> duhec begone!
+		if (isSejalecNearDuhec()) {
+			targetRoza = null;
+			vanishAI();
+		}
+		
+		// duhec blizu roze --> stop and suck its life!
+		if (isNearTargetRoza()) {
+		}
+		
+		// targetRoza obstaja --> duhec go towards it!
+		if (targetRoza) {
+			float step = speed * Time.deltaTime;
+			duhec.transform.position = Vector3.MoveTowards(duhec.transform.position, targetRoza.transform.position, step);
+			
 		}
 	}
 	
-	void EmergeAI() {
-		isHidden = false;
+	void emergeAI() {
+		Debug.Log("EMERGE duhec");
 		
-		//Random pozicija x in z v obmocju 29-54 na visini y = 10-15
+		System.Random rand = new System.Random();
 		
-		//najdi najblizjo rozico 
-		//izracunaj smer poti
-		//zacni potovati v tej smeri s hitrostjo speed
-		//ko je pri rozici nekaj casa 5-10 sekund odstrani rozico in duhca
-		//odstej tocke
-		//odzenes ga ce prides dovolj hitro do njega
-	
+		float xDuhec = (float) rand.Next(29,55);
+		float zDuhec = (float) rand.Next(29,55);
+		float yDuhec = (float) rand.Next(10,16);
+		
+		duhec.transform.position = new Vector3(xDuhec, yDuhec, zDuhec);
+		duhec.SetActive(true);
+		
+		audioSource.PlayOneShot(roar, 1f);
+		
+		targetRoza = getClosest();
 	}
 	
-	void VanishAI() {
-		isHidden = true;
+	void vanishAI() {
+		Debug.Log("VANISH duhec");
+		duhec.SetActive(false);
+		System.Random rand = new System.Random();
+		Invoke("emergeAI", rand.Next(30,61));
+	}
+	
+	GameObject getClosest() {
+		List<GameObject> big_flowers = gameManager.GetComponent<GameManager>().getBigFlowers();
+		float minDistance = float.MaxValue;
+		int index = 0;
+		for (int i = 0; i < big_flowers.Capacity; i++) {
+			float tempDistance = Vector3.Distance(duhec.transform.position, big_flowers[i].transform.position);
+			if (tempDistance < minDistance) {
+				minDistance = tempDistance;
+				index = i;
+			}
+		}
+		return big_flowers[index];
+	}
+	
+	bool isNearTargetRoza() {
+		return Vector3.Distance(duhec.transform.position, targetRoza.transform.position) < 1f;
+	}
+	
+	bool isSejalecNearDuhec() {
+		return Vector3.Distance(Sejalec.transform.position, duhec.transform.position) < 5f;
 	}
 	
 }
