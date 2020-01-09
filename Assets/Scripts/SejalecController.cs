@@ -50,8 +50,10 @@ public class SejalecController : MonoBehaviour{
         playerMovement.y = tmp;
 
         if (StandingOn("Dirt")) {
-            Debug.Log("slowed down");
+            animator.SetBool("slow", true);
             playerMovement *= speed_decrease;
+        } else {
+            animator.SetBool("slow", false);
         }
 
         if (!controller.isGrounded)
