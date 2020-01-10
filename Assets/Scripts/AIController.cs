@@ -213,8 +213,20 @@ public class AIController : MonoBehaviour {
 				c.gameObject.tag = "Dirt";
 				// 0 -> DIRT
 				c.gameObject.GetComponent<ChangeGround>().ChangeMaterial(0);
-				
 				changedCount--;
+				
+				Transform[] children = c.gameObject.GetComponentsInChildren<Transform>();
+				foreach (Transform child in children) {
+					if (child.gameObject.tag == "Flower") {
+						List<GameObject> list2 = gameManager.GetComponent<GameManager>().getBigFlowers();
+						list2.Remove(child.gameObject);
+						gameManager.GetComponent<GameManager>().setBigFlowers(list2);
+						GameObject.Destroy(child.gameObject);
+					}
+					else if (child.gameObject.tag == "Seed") {
+						GameObject.Destroy(child.gameObject);
+					}
+				}
 			}
 		}
 		gameManager.GetComponent<GameManager>().AddToScore(changedCount);
