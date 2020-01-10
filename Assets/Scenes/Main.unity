@@ -1979,7 +1979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f8ecd444e08f84298cf49d091b571d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2.5
   gravitySmoother: 0.1
   flower_effect_radius: 4
   Sejalec: {fileID: 1633994642}

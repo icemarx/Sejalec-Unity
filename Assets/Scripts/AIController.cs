@@ -103,8 +103,8 @@ public class AIController : MonoBehaviour {
 		duhec.transform.position = new Vector3(-50f, -50f, -50f);
 		duhec.SetActive(false);
 		System.Random rand = new System.Random();
-		//Invoke("emergeAI", rand.Next(30,61));
-		Invoke("emergeAI", 5); //DEBUG MODE
+		Invoke("emergeAI", rand.Next(30,61));
+		// Invoke("emergeAI", 5); //DEBUG MODE
 	}
 	
 	GameObject getClosest() {
