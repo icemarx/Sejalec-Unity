@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!143 &-8607635277273759752
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4180960763207367285}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0.0068706386
+  m_Radius: 0.020727925
+  m_SlopeLimit: 90
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &807612426918839796
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4180960763207367285}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.012688207
+  m_Height: 0.0077798185
+  m_Direction: 1
+  m_Center: {x: -0.000058280304, y: -0.00045459, z: 0.010330477}
 --- !u!1001 &4180960763207466197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9,7 +41,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 405773739202a664c856a05f70d48d9f, type: 3}
       propertyPath: m_Name
-      value: duhecbuhec-zlikovec6brezgat
+      value: Duhec
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 405773739202a664c856a05f70d48d9f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57,3 +89,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 405773739202a664c856a05f70d48d9f, type: 3}
+--- !u!1 &4180960763207367285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 405773739202a664c856a05f70d48d9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4180960763207466197}
+  m_PrefabAsset: {fileID: 0}
