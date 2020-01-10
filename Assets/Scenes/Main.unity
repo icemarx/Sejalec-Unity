@@ -1505,6 +1505,11 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 821054934}
+    - target: {fileID: 6186269375252354877, guid: ab6c6ab968ec84847ad287479fb58359,
+        type: 3}
+      propertyPath: speed_decrease
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7170103206383297833, guid: ab6c6ab968ec84847ad287479fb58359,
         type: 3}
       propertyPath: m_LocalPosition.x
