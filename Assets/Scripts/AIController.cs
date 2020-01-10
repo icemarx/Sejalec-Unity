@@ -20,17 +20,20 @@ public class AIController : MonoBehaviour {
 	public AudioClip sadNoise;
     public AudioSource audioSource;
 	
+    private CharacterController controller;
+	private Vector3 direction;
+	
 	void Start() {
 		//Debug.Log("Start duhec");
 		audioSource = GetComponent<AudioSource>();
 		
 		duhec = GameObject.Instantiate(duhecSkin);
 		duhec.transform.position = new Vector3(35f, 10f, 35f);
+        controller = duhec.GetComponent<CharacterController>();
 		
 		audioSource.PlayOneShot(roar, 1f);
 		
-		//Invoke("vanishAI", 5);
-		Invoke("vanishAI", 10); //DEBUG MODE
+		Invoke("vanishAI", 5);
 	}
 	
 	void Update() {
@@ -50,11 +53,20 @@ public class AIController : MonoBehaviour {
 			//float step = speed * Time.deltaTime;
 			//duhec.transform.position = Vector3.MoveTowards(duhec.transform.position, targetRoza.transform.position, step);
 			
-			float step = speed * Time.deltaTime;
+			float tmp = direction.y;
+			direction = targetRoza.transform.position - duhec.transform.position;
+			direction = direction.normalized;
+			direction.y = tmp;
 			
-			float tmp = duhec.transform.position.y;
-			duhec.transform.position = Vector3.MoveTowards(duhec.transform.position, targetRoza.transform.position, step);
-			duhec.transform.position = duhec.transform.position - Vector3.up * duhec.transform.position.y + Vector3.up * tmp;
+			if (!controller.isGrounded)
+				direction.y += Physics.gravity.y * gravitySmoother;
+			
+			direction *= speed * Time.deltaTime;
+			controller.Move(direction);
+			
+			//TODO: ko imamo tapravi MASH za duhca ga dodaj v Duhec Skin v INSPECTORJU DUHEC-a
+			//PA TUDI PREFABU DUHCA DODAJ CHARACTERCONTROLLER!!!!   /Add Component/Physics/Character Controller
+			
 		}
 	}
 	
@@ -73,8 +85,7 @@ public class AIController : MonoBehaviour {
 		
 		float xDuhec = (float) rand.Next(29,55);
 		float zDuhec = (float) rand.Next(29,55);
-		//float yDuhec = (float) rand.Next(10,16);
-		float yDuhec = 3f;
+		float yDuhec = 5f;
 		
 		duhec.transform.position = new Vector3(xDuhec, yDuhec, zDuhec);
 		duhec.SetActive(true);
@@ -136,15 +147,17 @@ public class AIController : MonoBehaviour {
 	
 	void turnGrassInDirt() {
 		Collider[] colliders = Physics.OverlapSphere(targetRoza.transform.position, flower_effect_radius);
-
+		int changedCount = 0;
 		foreach(Collider c in colliders) {
 			if(c.gameObject.tag == "Grass") {
 				c.gameObject.tag = "Dirt";
+				// 0 -> DIRT
 				c.gameObject.GetComponent<ChangeGround>().ChangeMaterial(0);
 				
-				// changeCount v minus!!
+				changedCount--;
 			}
 		}
+		gameManager.GetComponent<GameManager>().AddToScore(changedCount);
 	}
 	
 }
