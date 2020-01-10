@@ -50,9 +50,9 @@ public class VoxleFarm : MonoBehaviour
 		float yWell = 2f;
 		
 		//izberi block na hribcku ob igralcu    x = 41  z = 20
-		float xKozolec = 41f;
+		float xKozolec = 44f;
 		float zKozolec = 20f;
-		float yKozolec = 2f; 
+		float yKozolec = 1.7f; 
 
         for (int x = 0; x<cols; x++)
         {
