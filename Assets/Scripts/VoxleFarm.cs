@@ -180,8 +180,8 @@ public class VoxleFarm : MonoBehaviour
     }
 	
 	void initAlreadyChosenHill() {
-		alreadyChosenHill = new bool[8];
-		for (int i = 0; i < 8; i++) {
+		alreadyChosenHill = new bool[11];
+		for (int i = 0; i < 11; i++) {
 			alreadyChosenHill[i] = false;
 		}
 	}
@@ -198,14 +198,11 @@ public class VoxleFarm : MonoBehaviour
 			// 60  56
 			// 45  43
 			// 38  53
-			// 26  51
-			// 57  36
-			// 24  35
-			hribcki = new int[,] {{60,56},{45,43},{38,53},{26,51},{57,36},{24,35}};
-			chosen = rand.Next(6);
+			hribcki = new int[,] {{60,56},{45,43},{38,53}};
+			chosen = rand.Next(3);
 		}
 		else {
-			// hribkci vodnjak
+			// hribcki vodnjak
 			// x   z
 			// 15  60
 			// 20  39
@@ -215,9 +212,12 @@ public class VoxleFarm : MonoBehaviour
 			// 18  24
 			// 34  27
 			// 66  45
-			hribcki = new int[,] {{15,60},{20,39},{10,44},{12,14},{27,19},{18,24},{34,27},{66,45}};
-			chosen = rand.Next(8);
-			while (alreadyChosenHill[chosen]) chosen = (chosen + 1) % 8;
+			// 26  51
+			// 57  36
+			// 24  35
+			hribcki = new int[,] {{15,60},{20,39},{10,44},{12,14},{27,19},{18,24},{34,27},{66,45},{26,51},{57,36},{24,35}};
+			chosen = rand.Next(11);
+			while (alreadyChosenHill[chosen]) chosen = rand.Next(11);
 			alreadyChosenHill[chosen] = true;
 		}
 		float[] result = new float[2];
