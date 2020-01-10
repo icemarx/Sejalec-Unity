@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     {
         _groundBlocksCount = voxleFarm.GetComponent<VoxleFarm>().GetGroundBlocksCount();
         SetScore(0);
+
+        ChangeSkyboxTint(0f);
     }
 
     void Update()
@@ -141,8 +143,29 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            SetScore(Convert.ToInt32((double)_grassyBlocksCount / winCount * 100));
+            float procentageFloat = (float)_grassyBlocksCount / winCount;
+            SetScore(Convert.ToInt32(procentageFloat * 100));
+            ChangeSkyboxTint(procentageFloat);
         }
+    }
+
+    void ChangeSkyboxTint(float procentageFloat)
+    {
+        float red;
+        float redTrashold = 0.8f;
+        float halfProcentage = procentageFloat / 2;
+        
+        if(halfProcentage > redTrashold)
+        {
+            red = 0;
+        }
+        else
+        {
+            red = redTrashold - halfProcentage;
+        }
+
+        if (RenderSettings.skybox.HasProperty("_SkyTint"))
+            RenderSettings.skybox.SetColor("_SkyTint", new Color(red, procentageFloat, 0));
     }
 
     public void SetSeedsNumber(int seedsNum)
