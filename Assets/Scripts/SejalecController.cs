@@ -16,6 +16,10 @@ public class SejalecController : MonoBehaviour{
     public int seed_gain = 10;
     public int max_seed_num = 50;
 
+    public int num_of_water = 15;
+    public int water_gain = 5;
+    public int max_water_num = 20;
+
     private CharacterController controller;
     private Vector3 playerMovement;
 
@@ -30,6 +34,10 @@ public class SejalecController : MonoBehaviour{
     void Start() {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+
+        gameManager.GetComponent<GameManager>().SetSeedsNumber(num_of_seeds);
+        gameManager.GetComponent<GameManager>().SetWaterNumber(num_of_water);
+
     }
 
     // Update is called once per frame
@@ -178,68 +186,82 @@ public class SejalecController : MonoBehaviour{
         if (Physics.Raycast(ray_start, Vector3.down, out hit, 5f)) {
             GameObject target = hit.collider.gameObject;
             if (target.tag == "Dirt" || target.tag == "Grass") {
-                //Debug.Log("*watering noises*");
+                if(num_of_water > 0) {
+                    num_of_water--;
+                    gameManager.GetComponent<GameManager>().SetWaterNumber(num_of_water);
 
-                Transform[] children = target.GetComponentsInChildren<Transform>();
+                    //Debug.Log("*watering noises*");
 
-                if (children.Length > 1) {      // apparently each object is also a child of itself. That's why > 1
-                    if (target.tag == "Dirt") {
-                        // Debug.Log("We have grass");
-                        target.tag = "Grass";
-                        target.GetComponent<ChangeGround>().ChangeMaterial(previous_index = GRASS);
+                    Transform[] children = target.GetComponentsInChildren<Transform>();
 
-                        // count score
-                        changedCount++;
-                    }
+                    if (children.Length > 1) {      // apparently each object is also a child of itself. That's why > 1
+                        if (target.tag == "Dirt") {
+                            // Debug.Log("We have grass");
+                            target.tag = "Grass";
+                            target.GetComponent<ChangeGround>().ChangeMaterial(previous_index = GRASS);
 
-                    bool hadSeeds = false;
-                    foreach (Transform child in children) {
-                        if (child.gameObject.tag == "Seed") {
-                            hadSeeds = true;
-
-                            // replace with random flower from list
-                            GameObject f = RandomFlower();
-                            GameObject flower = Instantiate(f, child.position, Quaternion.Euler(child.eulerAngles + f.transform.eulerAngles) );
-                            flower.transform.parent = target.transform;
-
-                            // add to list of flowers
-                            gameManager.GetComponent<GameManager>().addBigFlower(flower);
-
-                            // remove seed
-                            Destroy(child.gameObject);
+                            // count score
+                            changedCount++;
                         }
-                    }
 
-                    if(hadSeeds) {
-                        // affect all voxels in range
-                        Collider[] colliders = Physics.OverlapSphere(target.transform.position, flower_effect_radius);
+                        bool hadSeeds = false;
+                        foreach (Transform child in children) {
+                            if (child.gameObject.tag == "Seed") {
+                                hadSeeds = true;
 
-                        foreach(Collider c in colliders) {
-                            if(c.gameObject.tag == "Grass" && Vector3.Magnitude(c.transform.position-target.transform.position) < Mathf.Ceil(flower_effect_radius/2)) {
+                                // replace with random flower from list
                                 GameObject f = RandomFlower();
-                                Vector3 pos = RandomPointOnVoxel(c.gameObject);
-                                Quaternion rot = Quaternion.Euler(f.transform.eulerAngles + new Vector3(0, Random.Range(0,360), 0));
+                                GameObject flower = Instantiate(f, child.position, Quaternion.Euler(child.eulerAngles + f.transform.eulerAngles));
+                                flower.transform.parent = target.transform;
 
-                                GameObject small_flower = Instantiate(f, pos, rot);
-                                small_flower.transform.localScale *= 0.4f;
-                                small_flower.transform.parent = target.transform;
+                                // add to list of flowers
+                                gameManager.GetComponent<GameManager>().addBigFlower(flower);
+
+                                // remove seed
+                                Destroy(child.gameObject);
                             }
+                        }
 
-                            if(c.gameObject.tag == "Dirt") {
-                                // Debug.DrawLine(target.transform.position + Vector3.up * 2, c.transform.position + Vector3.up * 2, Color.blue, 100);
+                        if (hadSeeds) {
+                            // affect all voxels in range
+                            Collider[] colliders = Physics.OverlapSphere(target.transform.position, flower_effect_radius);
 
-                                c.gameObject.tag = "Grass";
-                                c.gameObject.GetComponent<ChangeGround>().ChangeMaterial(GRASS);
+                            foreach (Collider c in colliders) {
+                                if (c.gameObject.tag == "Grass" && Vector3.Magnitude(c.transform.position - target.transform.position) < Mathf.Ceil(flower_effect_radius / 2)) {
+                                    GameObject f = RandomFlower();
+                                    Vector3 pos = RandomPointOnVoxel(c.gameObject);
+                                    Quaternion rot = Quaternion.Euler(f.transform.eulerAngles + new Vector3(0, Random.Range(0, 360), 0));
 
-                                // count score
-                                changedCount++;
+                                    GameObject small_flower = Instantiate(f, pos, rot);
+                                    small_flower.transform.localScale *= 0.4f;
+                                    small_flower.transform.parent = target.transform;
+                                }
+
+                                if (c.gameObject.tag == "Dirt") {
+                                    // Debug.DrawLine(target.transform.position + Vector3.up * 2, c.transform.position + Vector3.up * 2, Color.blue, 100);
+
+                                    c.gameObject.tag = "Grass";
+                                    c.gameObject.GetComponent<ChangeGround>().ChangeMaterial(GRASS);
+
+                                    // count score
+                                    changedCount++;
+                                }
                             }
                         }
                     }
-                }
 
+                } else {
+                    // TODO
+                    // Spawn Vesna
+                    // Point towards Vodnjak
+                }
                 // increase score
                 gameManager.GetComponent<GameManager>().AddToScore(changedCount);
+                Deselect();
+            }
+            else if(target.tag == "Vodnjak") {
+                num_of_water = (int)Mathf.Clamp(num_of_water + water_gain, 0, max_water_num);
+                gameManager.GetComponent<GameManager>().SetWaterNumber(num_of_water);
                 Deselect();
             }
         }

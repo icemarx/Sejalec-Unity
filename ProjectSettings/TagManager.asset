@@ -11,6 +11,7 @@ TagManager:
   - Seed
   - Flower
   - Kozolec
+  - Vodnjak
   layers:
   - Default
   - TransparentFX
