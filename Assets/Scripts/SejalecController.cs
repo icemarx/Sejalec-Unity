@@ -29,6 +29,8 @@ public class SejalecController : MonoBehaviour{
     public GameObject gameManager;
 
     private Animator animator;
+    public AudioClip watering_sound;
+    public AudioClip seeding_sound;
 
     // Start is called before the first frame update
     void Start() {
@@ -163,6 +165,8 @@ public class SejalecController : MonoBehaviour{
                     GameObject seed = Instantiate(Seed, hit.point, transform.rotation);
                     seed.transform.parent = target.transform;
 
+                    GetComponent<AudioSource>().PlayOneShot(seeding_sound);
+
                     num_of_seeds--;
                     gameManager.GetComponent<GameManager>().SetSeedsNumber(num_of_seeds);
                 } else if(num_of_seeds <= 0) {
@@ -197,6 +201,7 @@ public class SejalecController : MonoBehaviour{
                     gameManager.GetComponent<GameManager>().SetWaterNumber(num_of_water);
 
                     //Debug.Log("*watering noises*");
+                    GetComponent<AudioSource>().PlayOneShot(watering_sound);
 
                     Transform[] children = target.GetComponentsInChildren<Transform>();
 

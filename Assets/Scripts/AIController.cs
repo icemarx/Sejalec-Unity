@@ -20,10 +20,10 @@ public class AIController : MonoBehaviour {
 	public GameObject gameManager;
 	
     public AudioSource audioSource;
-	public AudioClip roar;
-	public AudioClip sadNoise;
+	public AudioClip alertVoice;
+	public AudioClip grassLost;
 	public AudioClip vesnaVoice;
-	public AudioClip sejalecVoice;
+	public AudioClip ghostDeadVoice;
 	
     private CharacterController controllerDuhec;
 	private Vector3 direction;
@@ -40,7 +40,7 @@ public class AIController : MonoBehaviour {
 		
 		duhec.transform.LookAt(Sejalec.transform);
 		duhec.transform.Rotate(-90,0,0);
-		audioSource.PlayOneShot(roar, 1f);
+		audioSource.PlayOneShot(alertVoice, 1f);
 		
 		Invoke("vanishAI", 5);
 	}
@@ -51,7 +51,7 @@ public class AIController : MonoBehaviour {
 		if (isSejalecNearDuhec()) {
 			targetRoza = null;
 			vanishAI();
-			audioSource.PlayOneShot(sejalecVoice, 1f);
+			audioSource.PlayOneShot(ghostDeadVoice, 1f);
 		}
 		
 		// duhec blizu roze --> stop and suck its life!
@@ -62,7 +62,7 @@ public class AIController : MonoBehaviour {
 		// alert duhec se bliza zvok
 		if (isNearTargetRozaAlert() && alert) {
 			alert = false;
-			audioSource.PlayOneShot(roar, 1f);
+			audioSource.PlayOneShot(alertVoice, 1f);
 		}
 		
 		// targetRoza obstaja --> duhec go towards it!
@@ -201,7 +201,7 @@ public class AIController : MonoBehaviour {
 			turnGrassInDirt();
 			targetRoza = null;
 			vanishAI();
-			audioSource.PlayOneShot(sadNoise, 1f);
+			audioSource.PlayOneShot(grassLost, 1f);
 		}
 	}
 	
@@ -213,8 +213,20 @@ public class AIController : MonoBehaviour {
 				c.gameObject.tag = "Dirt";
 				// 0 -> DIRT
 				c.gameObject.GetComponent<ChangeGround>().ChangeMaterial(0);
-				
 				changedCount--;
+				
+				Transform[] children = c.gameObject.GetComponentsInChildren<Transform>();
+				foreach (Transform child in children) {
+					if (child.gameObject.tag == "Flower") {
+						List<GameObject> list2 = gameManager.GetComponent<GameManager>().getBigFlowers();
+						list2.Remove(child.gameObject);
+						gameManager.GetComponent<GameManager>().setBigFlowers(list2);
+						GameObject.Destroy(child.gameObject);
+					}
+					else if (child.gameObject.tag == "Seed") {
+						GameObject.Destroy(child.gameObject);
+					}
+				}
 			}
 		}
 		gameManager.GetComponent<GameManager>().AddToScore(changedCount);
