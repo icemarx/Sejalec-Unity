@@ -12,6 +12,10 @@ public class SejalecController : MonoBehaviour{
     public GameObject[] Flowers;
     public GameObject Seed;
 
+    public int num_of_seeds = 15;
+    public int seed_gain = 10;
+    public int max_seed_num = 50;
+
     private CharacterController controller;
     private Vector3 playerMovement;
 
@@ -80,9 +84,9 @@ public class SejalecController : MonoBehaviour{
 
             // check if the target is a new target and recolor the old
             if (previously_selected != null && previously_selected != target) Deselect();
-            
+
             // try to recolor the new target
-            if (target.tag == "Dirt")  Select(DIRT, color, target);
+            if (target.tag == "Dirt") Select(DIRT, color, target);
             else if (target.tag == "Grass") Select(GRASS, color, target);
             else if (previously_selected != null)
                 // new target is not a valid target
@@ -137,6 +141,9 @@ public class SejalecController : MonoBehaviour{
                 seed.transform.parent = target.transform;
 
                 Deselect();
+            } else if(target.tag == "Kozolec") {
+                num_of_seeds = (int) Mathf.Clamp(seed_gain+num_of_seeds, 0, max_seed_num);
+                gameManager.GetComponent<GameManager>().SetSeedsNumber(num_of_seeds);
             }
         }
     }
