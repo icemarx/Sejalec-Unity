@@ -8,6 +8,7 @@ public class VoxleFarm : MonoBehaviour
     public GameObject groundBlock;
     public GameObject borderBlock;
 	public GameObject treeOfLife;
+	public GameObject treeOfLifeWithFlowers;
 	public GameObject well;
 	public GameObject kozolec;
 
@@ -22,6 +23,9 @@ public class VoxleFarm : MonoBehaviour
 	
 	private const int TREE = 0;
 	private const int WELL = 1;
+
+	private GameObject treeInstance;
+	private GameObject treeFlowersInstance;
 
     void Awake()
     {
@@ -87,8 +91,26 @@ public class VoxleFarm : MonoBehaviour
     }
 	
 	void GenerateTree(float x, float y, float z) {
-		GameObject newTree = GameObject.Instantiate(treeOfLife);
-		newTree.transform.position = new Vector3(x, y + 0.5f, z);		
+		treeInstance = GameObject.Instantiate(treeOfLife);
+		treeInstance.transform.position = new Vector3(x, y + 0.5f, z);
+
+		treeFlowersInstance = GameObject.Instantiate(treeOfLifeWithFlowers);
+		treeFlowersInstance.SetActive(false);
+		treeFlowersInstance.transform.position = new Vector3(x, y + 0.5f, z);
+	}
+
+	public void SwitchTree()
+	{
+		if (treeInstance.activeSelf)
+		{
+			treeFlowersInstance.SetActive(true);
+			treeInstance.SetActive(false);
+		}
+		else
+		{
+			treeInstance.SetActive(true);
+			treeFlowersInstance.SetActive(false);
+		}
 	}
 	
 	void GenerateWell(float x, float y, float z) {

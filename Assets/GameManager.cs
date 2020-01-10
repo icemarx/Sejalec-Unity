@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     public float winCondition = 0.6f;
     private int _grassyBlocksCount = 0;
 
+    public int treeSwitchTrashold = 75; // Score Procentage
+    private bool isTreeFlowered = false;
+
     private List<GameObject> big_flowers = new List<GameObject>();
 
     void Start()
@@ -117,6 +120,12 @@ public class GameManager : MonoBehaviour
         float scoreWidth = width / 100f * procentage;
 
         scoreRect.sizeDelta = new Vector2(scoreWidth, scoreRect.sizeDelta.y);
+
+        if((!isTreeFlowered && procentage>treeSwitchTrashold) || (isTreeFlowered && procentage< treeSwitchTrashold))
+        {
+            voxleFarm.GetComponent<VoxleFarm>().SwitchTree();
+            isTreeFlowered = !isTreeFlowered;
+        }
     }
 
     public void AddToScore(int count)

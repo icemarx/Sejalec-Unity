@@ -1154,6 +1154,7 @@ MonoBehaviour:
   waterText: {fileID: 1257747436}
   voxleFarm: {fileID: 732143553796672997}
   winCondition: 0.6
+  treeSwitchTrashold: 10
 --- !u!4 &821054936
 Transform:
   m_ObjectHideFlags: 0
@@ -2469,6 +2470,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: VoxleFarm
       objectReference: {fileID: 0}
+    - target: {fileID: 732143552664682254, guid: 683dc8d256e5e39499943fbd82002256,
+        type: 3}
+      propertyPath: treeOfLife
+      value: 
+      objectReference: {fileID: 7707762866360383930, guid: f185b0ff064bafb4db76f5d381be0622,
+        type: 3}
+    - target: {fileID: 732143552664682254, guid: 683dc8d256e5e39499943fbd82002256,
+        type: 3}
+      propertyPath: treeOfLifeWithFlowers
+      value: 
+      objectReference: {fileID: 2867393509261978566, guid: 4be82ed040c96c247a755bfe01dc2533,
+        type: 3}
     - target: {fileID: 732143552664682255, guid: 683dc8d256e5e39499943fbd82002256,
         type: 3}
       propertyPath: m_LocalPosition.x
