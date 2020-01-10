@@ -38,11 +38,12 @@ public class AIController : MonoBehaviour {
 		duhec.transform.position = new Vector3(35f, 10f, 35f);
         controllerDuhec = duhec.GetComponent<CharacterController>();
 		
-		duhec.transform.LookAt(Sejalec.transform);
-		duhec.transform.Rotate(-90,0,0);
-		audioSource.PlayOneShot(alertVoice, 1f);
-		
-		Invoke("vanishAI", 5);
+		// ni duhca na zacetki :( sadface
+		//duhec.transform.LookAt(Sejalec.transform);
+		//duhec.transform.Rotate(-90,0,0);
+		//audioSource.PlayOneShot(alertVoice, 1f);
+		//Invoke("vanishAI", 5);
+		vanishAI();
 	}
 	
 	void Update() {
