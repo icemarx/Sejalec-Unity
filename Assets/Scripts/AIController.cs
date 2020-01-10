@@ -23,9 +23,12 @@ public class AIController : MonoBehaviour {
 	public AudioClip roar;
 	public AudioClip sadNoise;
 	public AudioClip vesnaVoice;
+	public AudioClip sejalecVoice;
 	
     private CharacterController controllerDuhec;
 	private Vector3 direction;
+	
+	private bool alert;
 	
 	void Start() {
 		//Debug.Log("Start duhec");
@@ -43,15 +46,23 @@ public class AIController : MonoBehaviour {
 	}
 	
 	void Update() {
+		
 		// sejalec blizu duhca --> duhec begone!
 		if (isSejalecNearDuhec()) {
 			targetRoza = null;
 			vanishAI();
+			audioSource.PlayOneShot(sejalecVoice, 1f);
 		}
 		
 		// duhec blizu roze --> stop and suck its life!
 		if (isNearTargetRoza()) {
 			Invoke("deleteRoza", 5);
+		}
+		
+		// alert duhec se bliza zvok
+		if (isNearTargetRozaAlert() && alert) {
+			alert = false;
+			audioSource.PlayOneShot(roar, 1f);
 		}
 		
 		// targetRoza obstaja --> duhec go towards it!
@@ -99,7 +110,7 @@ public class AIController : MonoBehaviour {
 		emergeVesna();
 		Invoke("vanishVesna", 5);
 		
-		audioSource.PlayOneShot(roar, 1f);
+		alert = true;
 		
 		targetRoza = getRandom();
 	}
@@ -170,6 +181,11 @@ public class AIController : MonoBehaviour {
 	bool isNearTargetRoza() {
 		if (targetRoza == null) return false;
 		else return Vector3.Distance(duhec.transform.position, targetRoza.transform.position) < 5f;
+	}
+	
+	bool isNearTargetRozaAlert() {
+		if (targetRoza == null) return false;
+		else return Vector3.Distance(duhec.transform.position, targetRoza.transform.position) < 10f;
 	}
 	
 	bool isSejalecNearDuhec() {
