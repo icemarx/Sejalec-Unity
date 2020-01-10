@@ -88,6 +88,10 @@ public class SejalecController : MonoBehaviour{
             // try to recolor the new target
             if (target.tag == "Dirt") Select(DIRT, color, target);
             else if (target.tag == "Grass") Select(GRASS, color, target);
+            else if(target.tag == "Kozolec") {
+                target.GetComponent<MaterialSelector>().ChangeColor();
+                previously_selected = target;
+            }
             else if (previously_selected != null)
                 // new target is not a valid target
                 Deselect();
@@ -106,7 +110,11 @@ public class SejalecController : MonoBehaviour{
 
     void Deselect() {
         if(previously_selected != null) {
-            previously_selected.GetComponent<ChangeGround>().ChangeMaterial(previous_index);
+            if(previously_selected.tag == "Grass" || previously_selected.tag == "Dirt") {
+                previously_selected.GetComponent<ChangeGround>().ChangeMaterial(previous_index);
+            } else if(previously_selected.tag == "Kozolec") {
+                previously_selected.GetComponent<MaterialSelector>().ChangeColor();
+            }
             previous_index = -1;
             previously_selected = null;
         }
@@ -152,6 +160,8 @@ public class SejalecController : MonoBehaviour{
             } else if(target.tag == "Kozolec") {
                 num_of_seeds = (int) Mathf.Clamp(seed_gain+num_of_seeds, 0, max_seed_num);
                 gameManager.GetComponent<GameManager>().SetSeedsNumber(num_of_seeds);
+
+                Deselect();
             }
         }
     }
