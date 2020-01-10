@@ -136,9 +136,17 @@ public class SejalecController : MonoBehaviour{
         if (Physics.Raycast(ray_start, Vector3.down, out hit, 5f)) {
             GameObject target = hit.collider.gameObject;
             if(target.tag == "Dirt" || target.tag == "Grass") {
-                // Debug.Log("*planting noises*");
-                GameObject seed = Instantiate(Seed, hit.point, transform.rotation);
-                seed.transform.parent = target.transform;
+                if(num_of_seeds > 0) {
+                    GameObject seed = Instantiate(Seed, hit.point, transform.rotation);
+                    seed.transform.parent = target.transform;
+
+                    num_of_seeds--;
+                    gameManager.GetComponent<GameManager>().SetSeedsNumber(num_of_seeds);
+                } else if(num_of_seeds <= 0) {
+                    // TODO:
+                    // Spawn Vesna
+                    // make her point to Kozolec
+                }
 
                 Deselect();
             } else if(target.tag == "Kozolec") {
