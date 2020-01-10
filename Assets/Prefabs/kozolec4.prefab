@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5486605741801617142}
   - component: {fileID: 7876466339596639859}
   - component: {fileID: -3417327195264405263}
+  - component: {fileID: 4390097393103384948}
   m_Layer: 0
   m_Name: kozolec4
   m_TagString: Kozolec
@@ -109,3 +110,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selected_material: {fileID: 2100000, guid: 812f9e578d87b1344a16397b2232c0f8, type: 2}
   default_material: {fileID: 2100000, guid: 0f43aa4396c3e9244ae9f71f7e39c6f4, type: 3}
+--- !u!65 &4390097393103384948
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486605741799680054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.07408787, y: 0.010364949, z: 0.002679302}
+  m_Center: {x: -0.02767163, y: 0.002256173, z: 0.0033001916}
