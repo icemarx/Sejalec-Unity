@@ -1993,10 +1993,10 @@ MonoBehaviour:
   vesna: {fileID: 0}
   gameManager: {fileID: 821054934}
   audioSource: {fileID: 0}
-  roar: {fileID: 8300000, guid: 56d7466339e8db44eabc561bfde2f48c, type: 3}
-  sadNoise: {fileID: 8300000, guid: f71e97fd64522ca49955353c04874d6b, type: 3}
+  alertVoice: {fileID: 8300000, guid: d35ffb2a9825bbe40bf53dcb51a98c2f, type: 3}
+  grassLost: {fileID: 8300000, guid: f393ac162478d3243a5e145394ece400, type: 3}
   vesnaVoice: {fileID: 8300000, guid: 4ca8a11f81b3ee84b986837b7ca1b85d, type: 3}
-  sejalecVoice: {fileID: 8300000, guid: 4becb98b7f3b969418e7c1e4f9342694, type: 3}
+  ghostDeadVoice: {fileID: 8300000, guid: ba37af874adb8ac44867d5476f4a0d04, type: 3}
 --- !u!4 &1436754754
 Transform:
   m_ObjectHideFlags: 0
