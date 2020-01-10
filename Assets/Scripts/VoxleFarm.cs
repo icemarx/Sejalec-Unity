@@ -26,6 +26,8 @@ public class VoxleFarm : MonoBehaviour
 
 	private GameObject treeInstance;
 	private GameObject treeFlowersInstance;
+	
+	private bool[] alreadyChosenHill;
 
     void Awake()
     {
@@ -41,17 +43,28 @@ public class VoxleFarm : MonoBehaviour
     {
         System.Random rand = new System.Random();
 		
+		initAlreadyChosenHill();
+		
 		//pridobi hribcka
 		float[] treeCoord = randomHribcek(TREE);
-		float[] wellCoord = randomHribcek(WELL);
-		
 		float xTree = treeCoord[0];
 		float zTree = treeCoord[1];
 		float yTree = 2f;
 		
+		float[] wellCoord = randomHribcek(WELL);
 		float xWell = wellCoord[0];
 		float zWell = wellCoord[1];
 		float yWell = 2f;
+		
+		wellCoord = randomHribcek(WELL);
+		float xWell1 = wellCoord[0];
+		float zWell1 = wellCoord[1];
+		float yWell1 = 2f;
+		
+		wellCoord = randomHribcek(WELL);
+		float xWell2 = wellCoord[0];
+		float zWell2 = wellCoord[1];
+		float yWell2 = 2f;
 		
 		//izberi block na hribcku ob igralcu    x = 41  z = 20
 		float xKozolec = 44f;
@@ -80,6 +93,8 @@ public class VoxleFarm : MonoBehaviour
                 newBlock.transform.parent = transform;
 				
 				if (xWell == x && zWell == z) yWell = y;
+				if (xWell1 == x && zWell1 == z) yWell1 = y;
+				if (xWell2 == x && zWell2 == z) yWell2 = y;
 				if (xTree == x && zTree == z) yTree = y;
 				if (xKozolec == x && zKozolec == z) yKozolec = y;
             }
@@ -87,17 +102,10 @@ public class VoxleFarm : MonoBehaviour
 		
 		GenerateTree(xTree, yTree, zTree);
 		GenerateWell(xWell, yWell, zWell);
+		GenerateWell(xWell1, yWell1, zWell1);
+		GenerateWell(xWell2, yWell2, zWell2);
 		GenerateKowzowlec(xKozolec, yKozolec, zKozolec);
     }
-	
-	void GenerateTree(float x, float y, float z) {
-		treeInstance = GameObject.Instantiate(treeOfLife);
-		treeInstance.transform.position = new Vector3(x, y + 0.5f, z);
-
-		treeFlowersInstance = GameObject.Instantiate(treeOfLifeWithFlowers);
-		treeFlowersInstance.SetActive(false);
-		treeFlowersInstance.transform.position = new Vector3(x, y + 0.5f, z);
-	}
 
 	public void SwitchTree()
 	{
@@ -111,6 +119,15 @@ public class VoxleFarm : MonoBehaviour
 			treeInstance.SetActive(true);
 			treeFlowersInstance.SetActive(false);
 		}
+	}
+	
+	void GenerateTree(float x, float y, float z) {
+		treeInstance = GameObject.Instantiate(treeOfLife);
+		treeInstance.transform.position = new Vector3(x, y + 0.5f, z);
+
+		treeFlowersInstance = GameObject.Instantiate(treeOfLifeWithFlowers);
+		treeFlowersInstance.SetActive(false);
+		treeFlowersInstance.transform.position = new Vector3(x, y + 0.5f, z);
 	}
 	
 	void GenerateWell(float x, float y, float z) {
@@ -162,12 +179,19 @@ public class VoxleFarm : MonoBehaviour
         }
     }
 	
+	void initAlreadyChosenHill() {
+		alreadyChosenHill = new bool[8];
+		for (int i = 0; i < 8; i++) {
+			alreadyChosenHill[i] = false;
+		}
+	}
+	
 	float[] randomHribcek(int well_tree) {
 		// 0 ==> X
 		// 1 ==> Z
         System.Random rand = new System.Random();
 		int[,] hribcki;
-		int choose;
+		int chosen;
 		if (well_tree == TREE) {
 			// hribcki drevo
 			// x   z
@@ -178,7 +202,7 @@ public class VoxleFarm : MonoBehaviour
 			// 57  36
 			// 24  35
 			hribcki = new int[,] {{60,56},{45,43},{38,53},{26,51},{57,36},{24,35}};
-			choose = rand.Next(6);
+			chosen = rand.Next(6);
 		}
 		else {
 			// hribkci vodnjak
@@ -192,11 +216,13 @@ public class VoxleFarm : MonoBehaviour
 			// 34  27
 			// 66  45
 			hribcki = new int[,] {{15,60},{20,39},{10,44},{12,14},{27,19},{18,24},{34,27},{66,45}};
-			choose = rand.Next(8);
+			chosen = rand.Next(8);
+			while (alreadyChosenHill[chosen]) chosen = (chosen + 1) % 8;
+			alreadyChosenHill[chosen] = true;
 		}
 		float[] result = new float[2];
-		result[0] = (float) hribcki[choose,0];
-		result[1] = (float) hribcki[choose,1];
+		result[0] = (float) hribcki[chosen,0];
+		result[1] = (float) hribcki[chosen,1];
 		return result;
 	}
 }
