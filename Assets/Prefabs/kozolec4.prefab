@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5486605741799322646}
   - component: {fileID: 5486605741800649782}
   - component: {fileID: 5486605741801617142}
+  - component: {fileID: 7876466339596639859}
   m_Layer: 0
   m_Name: kozolec4
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &7876466339596639859
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486605741799680054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 0f43aa4396c3e9244ae9f71f7e39c6f4, type: 3}

@@ -47,6 +47,10 @@ MonoBehaviour:
     type: 3}
   borderBlock: {fileID: 5532503343348421447, guid: a16cb86cab0bfe5428af4f35eb071863,
     type: 3}
+  treeOfLife: {fileID: 6446505124088900953, guid: 94aa62977c7f9a84f928f54a2e910b1a,
+    type: 3}
+  well: {fileID: 1456883708363128880, guid: abdf2424274244f48928e0acf028e7f1, type: 3}
+  kozolec: {fileID: 5486605741799680054, guid: fe54ca08279680a4ea66fd78138574e9, type: 3}
   amplitude: 5
   freq: 8
   cols: 75
