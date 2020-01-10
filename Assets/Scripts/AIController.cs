@@ -94,7 +94,7 @@ public class AIController : MonoBehaviour {
 		
 		// ni rozic ni duhca!
 		if (big_flowers.Count < 1) {
-			Invoke("emergeAI",5);
+			Invoke("emergeAI",7);
 			return;
 		}
 		
@@ -120,8 +120,8 @@ public class AIController : MonoBehaviour {
 		duhec.transform.position = new Vector3(-50f, -50f, -50f);
 		duhec.SetActive(false);
 		System.Random rand = new System.Random();
-		Invoke("emergeAI", rand.Next(30,61));
-		//Invoke("emergeAI", 5); //DEBUG MODE
+		//Invoke("emergeAI", rand.Next(30,61));
+		Invoke("emergeAI", 5); //DEBUG MODE
 	}
 	
 	void emergeVesna() {
@@ -185,7 +185,7 @@ public class AIController : MonoBehaviour {
 	
 	bool isNearTargetRozaAlert() {
 		if (targetRoza == null) return false;
-		else return Vector3.Distance(duhec.transform.position, targetRoza.transform.position) < 10f;
+		else return Vector3.Distance(duhec.transform.position, targetRoza.transform.position) < 15f;
 	}
 	
 	bool isSejalecNearDuhec() {
