@@ -1154,7 +1154,7 @@ MonoBehaviour:
   waterText: {fileID: 1257747436}
   voxleFarm: {fileID: 732143553796672997}
   winCondition: 0.6
-  treeSwitchTrashold: 10
+  treeSwitchTrashold: 75
 --- !u!4 &821054936
 Transform:
   m_ObjectHideFlags: 0
@@ -1524,7 +1524,7 @@ PrefabInstance:
     - target: {fileID: 7170103206383297833, guid: ab6c6ab968ec84847ad287479fb58359,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7170103206383297833, guid: ab6c6ab968ec84847ad287479fb58359,
         type: 3}
@@ -1988,10 +1988,14 @@ MonoBehaviour:
     type: 3}
   duhec: {fileID: 0}
   targetRoza: {fileID: 0}
+  vesnaSkin: {fileID: 6446505124088900953, guid: 94aa62977c7f9a84f928f54a2e910b1a,
+    type: 3}
+  vesna: {fileID: 0}
   gameManager: {fileID: 821054934}
+  audioSource: {fileID: 0}
   roar: {fileID: 8300000, guid: 56d7466339e8db44eabc561bfde2f48c, type: 3}
   sadNoise: {fileID: 8300000, guid: f71e97fd64522ca49955353c04874d6b, type: 3}
-  audioSource: {fileID: 0}
+  vesnaVoice: {fileID: 8300000, guid: 51999eb6ffac21a4e9ff6a7470e75271, type: 3}
 --- !u!4 &1436754754
 Transform:
   m_ObjectHideFlags: 0
