@@ -82,19 +82,21 @@ public class SejalecController : MonoBehaviour{
         if (Physics.Raycast(ray_start, Vector3.down, out hit, 5f)) {
             GameObject target = hit.collider.gameObject;
 
-            // check if the target is a new target and recolor the old
-            if (previously_selected != null && previously_selected != target) Deselect();
+            if (previously_selected != target) {
+                // check if the target is a new target and recolor the old
+                if (previously_selected != null && previously_selected != target) Deselect();
 
-            // try to recolor the new target
-            if (target.tag == "Dirt") Select(DIRT, color, target);
-            else if (target.tag == "Grass") Select(GRASS, color, target);
-            else if(target.tag == "Kozolec") {
-                target.GetComponent<MaterialSelector>().ChangeColor();
-                previously_selected = target;
+                // try to recolor the new target
+                if (target.tag == "Dirt") Select(DIRT, color, target);
+                else if (target.tag == "Grass") Select(GRASS, color, target);
+                else if (target.tag == "Kozolec") {
+                    Debug.Log(previously_selected);
+                    target.GetComponent<MaterialSelector>().ChangeColor();
+                    previously_selected = target;
+                } else if (previously_selected != null)
+                    // new target is not a valid target
+                    Deselect();
             }
-            else if (previously_selected != null)
-                // new target is not a valid target
-                Deselect();
 
         } else if (previously_selected != null) {
             // no new target
