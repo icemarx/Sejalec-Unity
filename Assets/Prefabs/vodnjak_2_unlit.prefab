@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1456883708363430928}
-  - component: {fileID: 2205712119073558235}
   m_Layer: 0
   m_Name: vodnjak_2_unlit
   m_TagString: Vodnjak
@@ -25,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456883708363128880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 45.03016, y: 0.41982317, z: 29.297752}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1456883708363430932}
@@ -33,20 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2205712119073558235
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1456883708363128880}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 2.25
-  m_Height: 11
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.2039366, z: 0}
 --- !u!1 &1456883708363128884
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,9 +43,12 @@ GameObject:
   - component: {fileID: 1456883708363430932}
   - component: {fileID: 1456883708366298164}
   - component: {fileID: 1456883708365332212}
+  - component: {fileID: 9122338461638686266}
+  - component: {fileID: 7417971041095522655}
+  - component: {fileID: 8117267698133727840}
   m_Layer: 0
   m_Name: Cone
-  m_TagString: Untagged
+  m_TagString: Vodnjak
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,6 +113,48 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &9122338461638686266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456883708363128884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9541203daf3e843ad70ece49c21e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected_material: {fileID: 2100000, guid: b3a830d3abaa7ef4489615cd39406e2f, type: 2}
+  default_material: {fileID: 2100000, guid: adbeb24593686044e8c0dd31cdd7a783, type: 2}
+--- !u!64 &7417971041095522655
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456883708363128884}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: e212fc811f67ce24a861e9238b88bc09, type: 3}
+--- !u!136 &8117267698133727840
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456883708363128884}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.016688643
+  m_Height: 0.03737702
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.06547544}
 --- !u!1 &1456883708363128886
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +168,7 @@ GameObject:
   - component: {fileID: 1456883708365332214}
   m_Layer: 0
   m_Name: Cylinder.001
-  m_TagString: Untagged
+  m_TagString: Vodnjak
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

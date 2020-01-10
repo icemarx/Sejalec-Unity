@@ -18,7 +18,7 @@ public class SejalecController : MonoBehaviour{
 
     public int num_of_water = 15;
     public int water_gain = 5;
-    public int max_water_num = 20;
+    public int max_water_num = 25;
 
     private CharacterController controller;
     private Vector3 playerMovement;
@@ -97,7 +97,10 @@ public class SejalecController : MonoBehaviour{
                 // try to recolor the new target
                 if (target.tag == "Dirt") Select(DIRT, color, target);
                 else if (target.tag == "Grass") Select(GRASS, color, target);
-                else if (target.tag == "Kozolec") {
+                else if (target.tag == "Kozolec" && color == PLANTED) {
+                    target.GetComponent<MaterialSelector>().ChangeColor();
+                    previously_selected = target;
+                } else if (target.tag == "Vodnjak" && color == WATERED) {
                     target.GetComponent<MaterialSelector>().ChangeColor();
                     previously_selected = target;
                 } else if (previously_selected != null)
@@ -121,7 +124,7 @@ public class SejalecController : MonoBehaviour{
         if(previously_selected != null) {
             if(previously_selected.tag == "Grass" || previously_selected.tag == "Dirt") {
                 previously_selected.GetComponent<ChangeGround>().ChangeMaterial(previous_index);
-            } else if(previously_selected.tag == "Kozolec") {
+            } else if(previously_selected.tag == "Kozolec" || previously_selected.tag == "Vodnjak") {
                 previously_selected.GetComponent<MaterialSelector>().ChangeColor();
             }
             previous_index = -1;
@@ -257,13 +260,11 @@ public class SejalecController : MonoBehaviour{
                 }
                 // increase score
                 gameManager.GetComponent<GameManager>().AddToScore(changedCount);
-                Deselect();
-            }
-            else if(target.tag == "Vodnjak") {
-                num_of_water = (int)Mathf.Clamp(num_of_water + water_gain, 0, max_water_num);
+            } else if(target.tag == "Vodnjak") {
+                num_of_water = (int) Mathf.Clamp(num_of_water + water_gain, 0, max_water_num);
                 gameManager.GetComponent<GameManager>().SetWaterNumber(num_of_water);
-                Deselect();
             }
+            Deselect();
         }
     }
 
