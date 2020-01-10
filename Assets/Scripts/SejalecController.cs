@@ -30,6 +30,7 @@ public class SejalecController : MonoBehaviour{
 
     private Animator animator;
     public AudioClip watering_sound;
+    public AudioClip seeding_sound;
 
     // Start is called before the first frame update
     void Start() {
@@ -160,6 +161,8 @@ public class SejalecController : MonoBehaviour{
                 if(num_of_seeds > 0) {
                     GameObject seed = Instantiate(Seed, hit.point, transform.rotation);
                     seed.transform.parent = target.transform;
+
+                    GetComponent<AudioSource>().PlayOneShot(seeding_sound);
 
                     num_of_seeds--;
                     gameManager.GetComponent<GameManager>().SetSeedsNumber(num_of_seeds);
