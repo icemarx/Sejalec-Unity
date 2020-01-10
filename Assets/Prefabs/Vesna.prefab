@@ -1220,7 +1220,7 @@ GameObject:
   - component: {fileID: 6446505124088672633}
   - component: {fileID: 6446505124098252441}
   m_Layer: 0
-  m_Name: Charge
+  m_Name: Vesna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1252,7 +1252,7 @@ Animator:
   m_GameObject: {fileID: 6446505124088900953}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 810a0eb403d1f6745bc83a6bdc8ddb31, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1985e2699155ae469c95cb827e5ab24, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
