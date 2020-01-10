@@ -38,6 +38,9 @@ public class SejalecController : MonoBehaviour{
         gameManager.GetComponent<GameManager>().SetSeedsNumber(num_of_seeds);
         gameManager.GetComponent<GameManager>().SetWaterNumber(num_of_water);
 
+        max_seed_num = DifficultySettings.HoldSeeds;
+        max_water_num = DifficultySettings.HoldWater;
+
     }
 
     // Update is called once per frame
