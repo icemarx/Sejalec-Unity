@@ -20,7 +20,7 @@ public class AIController : MonoBehaviour {
 	public AudioClip sadNoise;
     public AudioSource audioSource;
 	
-    private CharacterController controller;
+    private CharacterController controllerDuhec;
 	private Vector3 direction;
 	
 	void Start() {
@@ -29,7 +29,7 @@ public class AIController : MonoBehaviour {
 		
 		duhec = GameObject.Instantiate(duhecSkin);
 		duhec.transform.position = new Vector3(35f, 10f, 35f);
-        controller = duhec.GetComponent<CharacterController>();
+        controllerDuhec = duhec.GetComponent<CharacterController>();
 		
 		audioSource.PlayOneShot(roar, 1f);
 		
@@ -50,6 +50,7 @@ public class AIController : MonoBehaviour {
 		
 		// targetRoza obstaja --> duhec go towards it!
 		if (targetRoza != null) {
+			//Debug.Log("se premikam");
 			//float step = speed * Time.deltaTime;
 			//duhec.transform.position = Vector3.MoveTowards(duhec.transform.position, targetRoza.transform.position, step);
 			
@@ -58,15 +59,17 @@ public class AIController : MonoBehaviour {
 			direction = direction.normalized;
 			direction.y = tmp;
 			
-			if (!controller.isGrounded)
+			if (!controllerDuhec.isGrounded)
 				direction.y += Physics.gravity.y * gravitySmoother;
 			
 			direction *= speed * Time.deltaTime;
-			controller.Move(direction);
+			controllerDuhec.Move(direction);
 			
-			//TODO: ko imamo tapravi MASH za duhca ga dodaj v Duhec Skin v INSPECTORJU DUHEC-a
-			//PA TUDI PREFABU DUHCA DODAJ CHARACTERCONTROLLER!!!!   /Add Component/Physics/Character Controller
-			
+			// TODO: 
+			// DUHEC prefab, ki ga dodas v "Duhec Skin" 
+			// mora imeti CharacterController in Sphere Collider al neki
+			// to dvoje mora imet tudi DUHEC object v Main poleg se AIController skripte in audioSource-a
+			// ne pozabi SLOPE LIMIT dat na 90
 		}
 	}
 	
