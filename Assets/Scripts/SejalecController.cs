@@ -90,7 +90,6 @@ public class SejalecController : MonoBehaviour{
                 if (target.tag == "Dirt") Select(DIRT, color, target);
                 else if (target.tag == "Grass") Select(GRASS, color, target);
                 else if (target.tag == "Kozolec") {
-                    Debug.Log(previously_selected);
                     target.GetComponent<MaterialSelector>().ChangeColor();
                     previously_selected = target;
                 } else if (previously_selected != null)
