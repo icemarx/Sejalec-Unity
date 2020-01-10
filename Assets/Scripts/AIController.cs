@@ -14,11 +14,15 @@ public class AIController : MonoBehaviour {
 	public GameObject duhec;
 	public GameObject targetRoza = null;
 	
+	public GameObject vesnaSkin;
+	public GameObject vesna;
+	
 	public GameObject gameManager;
 	
+    public AudioSource audioSource;
 	public AudioClip roar;
 	public AudioClip sadNoise;
-    public AudioSource audioSource;
+	public AudioClip vesnaVoice;
 	
     private CharacterController controllerDuhec;
 	private Vector3 direction;
@@ -31,6 +35,8 @@ public class AIController : MonoBehaviour {
 		duhec.transform.position = new Vector3(35f, 10f, 35f);
         controllerDuhec = duhec.GetComponent<CharacterController>();
 		
+		duhec.transform.LookAt(Sejalec.transform);
+		duhec.transform.Rotate(-90,0,0);
 		audioSource.PlayOneShot(roar, 1f);
 		
 		Invoke("vanishAI", 5);
@@ -54,6 +60,9 @@ public class AIController : MonoBehaviour {
 			//float step = speed * Time.deltaTime;
 			//duhec.transform.position = Vector3.MoveTowards(duhec.transform.position, targetRoza.transform.position, step);
 			
+			duhec.transform.LookAt(targetRoza.transform);
+			duhec.transform.Rotate(-90,0,0);
+			
 			float tmp = direction.y;
 			direction = targetRoza.transform.position - duhec.transform.position;
 			direction = direction.normalized;
@@ -64,12 +73,6 @@ public class AIController : MonoBehaviour {
 			
 			direction *= speed * Time.deltaTime;
 			controllerDuhec.Move(direction);
-			
-			// TODO: 
-			// DUHEC prefab, ki ga dodas v "Duhec Skin" 
-			// mora imeti CharacterController in Sphere Collider al neki
-			// to dvoje mora imet tudi DUHEC object v Main poleg se AIController skripte in audioSource-a
-			// ne pozabi SLOPE LIMIT dat na 90
 		}
 	}
 	
@@ -93,9 +96,12 @@ public class AIController : MonoBehaviour {
 		duhec.transform.position = new Vector3(xDuhec, yDuhec, zDuhec);
 		duhec.SetActive(true);
 		
+		emergeVesna();
+		Invoke("vanishVesna", 5);
+		
 		audioSource.PlayOneShot(roar, 1f);
 		
-		targetRoza = getClosest();
+		targetRoza = getRandom();
 	}
 	
 	void vanishAI() {
@@ -103,14 +109,42 @@ public class AIController : MonoBehaviour {
 		duhec.transform.position = new Vector3(-50f, -50f, -50f);
 		duhec.SetActive(false);
 		System.Random rand = new System.Random();
-		Invoke("emergeAI", rand.Next(30,61));
-		// Invoke("emergeAI", 5); //DEBUG MODE
+		//Invoke("emergeAI", rand.Next(30,61));
+		Invoke("emergeAI", 5); //DEBUG MODE
+	}
+	
+	void emergeVesna() {
+		RaycastHit hit;
+		Vector3 coordsVesna = Sejalec.transform.position + Sejalec.transform.forward * 4f;
+		coordsVesna.y = Sejalec.transform.position.y + Vector3.up.y * 3f;
+		
+		if (Physics.Raycast(coordsVesna, Vector3.down, out hit, 10f)) {
+			GameObject target = hit.collider.gameObject;
+			if (target.tag == "Border" || target.tag == "Vodnjak" || target.tag == "Drevo" || target.tag == "Kozolec") {
+				coordsVesna = Sejalec.transform.position - Sejalec.transform.forward * 3f;
+				if (Physics.Raycast(coordsVesna, Vector3.down, out hit, 10f)) {
+					target = hit.collider.gameObject;
+				}
+			}
+			coordsVesna.y = target.transform.position.y + 0.5f;
+		} else { // ce se kej zafrkne
+			coordsVesna.y = 4f;
+		}
+		
+		vesna = GameObject.Instantiate(vesnaSkin);
+		vesna.transform.position = coordsVesna;
+		vesna.transform.LookAt(duhec.transform);
+		audioSource.PlayOneShot(vesnaVoice, 1f);
+	}
+	
+	void vanishVesna() {
+		GameObject.Destroy(vesna);
 	}
 	
 	GameObject getClosest() {
 		List<GameObject> big_flowers = gameManager.GetComponent<GameManager>().getBigFlowers();
 		//Debug.Log("big_flowers: " + big_flowers.Count);
-		if (big_flowers.Capacity < 1) return null;
+		if (big_flowers.Count < 1) return null;
 		float minDistance = float.MaxValue;
 		int index = 0;
 		for (int i = 0; i < big_flowers.Count; i++) {
@@ -126,13 +160,20 @@ public class AIController : MonoBehaviour {
 		return big_flowers[index];
 	}
 	
+	GameObject getRandom() {
+		System.Random rand = new System.Random();
+		List<GameObject> big_flowers = gameManager.GetComponent<GameManager>().getBigFlowers();
+		if (big_flowers.Count < 1) return null;
+		return big_flowers[rand.Next(big_flowers.Count)];
+	}
+	
 	bool isNearTargetRoza() {
 		if (targetRoza == null) return false;
 		else return Vector3.Distance(duhec.transform.position, targetRoza.transform.position) < 5f;
 	}
 	
 	bool isSejalecNearDuhec() {
-		return Vector3.Distance(Sejalec.transform.position, duhec.transform.position) < 5f;
+		return Vector3.Distance(Sejalec.transform.position, duhec.transform.position) < 4f;
 	}
 	
 	void deleteRoza() {
