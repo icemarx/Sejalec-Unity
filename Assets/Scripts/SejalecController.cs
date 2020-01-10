@@ -29,6 +29,7 @@ public class SejalecController : MonoBehaviour{
     public GameObject gameManager;
 
     private Animator animator;
+    public AudioClip watering_sound;
 
     // Start is called before the first frame update
     void Start() {
@@ -194,6 +195,7 @@ public class SejalecController : MonoBehaviour{
                     gameManager.GetComponent<GameManager>().SetWaterNumber(num_of_water);
 
                     //Debug.Log("*watering noises*");
+                    GetComponent<AudioSource>().PlayOneShot(watering_sound);
 
                     Transform[] children = target.GetComponentsInChildren<Transform>();
 
