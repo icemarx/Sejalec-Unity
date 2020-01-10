@@ -181,4 +181,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> getBigFlowers() {
         return this.big_flowers;
     }
+	
+	public void setBigFlowers(List<GameObject> lst) {
+		this.big_flowers = lst;
+	}
 }
