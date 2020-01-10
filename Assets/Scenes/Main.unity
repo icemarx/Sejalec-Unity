@@ -1995,7 +1995,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   roar: {fileID: 8300000, guid: 56d7466339e8db44eabc561bfde2f48c, type: 3}
   sadNoise: {fileID: 8300000, guid: f71e97fd64522ca49955353c04874d6b, type: 3}
-  vesnaVoice: {fileID: 8300000, guid: 51999eb6ffac21a4e9ff6a7470e75271, type: 3}
+  vesnaVoice: {fileID: 8300000, guid: 4ca8a11f81b3ee84b986837b7ca1b85d, type: 3}
 --- !u!4 &1436754754
 Transform:
   m_ObjectHideFlags: 0
